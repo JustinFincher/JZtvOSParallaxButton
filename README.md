@@ -6,11 +6,12 @@
 [![Platform](https://img.shields.io/cocoapods/p/JZtvOSParallaxButton.svg?style=flat)](http://cocoapods.org/pods/JZtvOSParallaxButton)
 
 ## Introduction
-![]()
+![https://github.com/JustinFincher/JZtvOSParallaxButton/blob/master/DemoPic/JPG.jpg](https://github.com/JustinFincher/JZtvOSParallaxButton/blob/master/DemoPic/JPG.jpg)
 tvOS Button with Parallax Effect (ObjC).  
 Apple TV HIG has a [Video](https://developer.apple.com/tvos/human-interface-guidelines/icons-and-images/images/icons-and-images-layering.mp4)  
 This is a Button try to be similar. With reflection light, long press to enable parallax mode, long press to disable.  
 DemoGif:
+![https://github.com/JustinFincher/JZtvOSParallaxButton/blob/master/DemoPic/GIF.gif](https://github.com/JustinFincher/JZtvOSParallaxButton/blob/master/DemoPic/GIF.gif)
 
 ## Usage
 ```

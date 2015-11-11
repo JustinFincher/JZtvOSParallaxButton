@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>JZtvOSParallaxButton-JZtvOSParallaxButton.xcscheme</key>
+		<key>JZtvOSParallaxButton-JZParallaxButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,11 +27,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>196CDFF7EC70CBA11695F6C7F1C60D9C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1E88063775E18B2DCE57DEA9E47DDD6F</key>
 		<dict>
 			<key>primary</key>
@@ -42,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E7CFCC5CFF57F61C4DE77B305EE660C7</key>
+		<key>CEB3BD52DBA4D05A365D7F4B25381A4A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F9A8BD0231FDDF4021053307F896D75A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

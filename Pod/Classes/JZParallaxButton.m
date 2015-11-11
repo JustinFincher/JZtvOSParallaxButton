@@ -24,7 +24,7 @@
 
 //RotateParameter:
 #define RotateParameter 0.5
-#define SpotlightOutRange 5.0f
+#define SpotlightOutRange 20.0f
 #define zPositionMax 800
 
 #define BoundsVieTranslation 50

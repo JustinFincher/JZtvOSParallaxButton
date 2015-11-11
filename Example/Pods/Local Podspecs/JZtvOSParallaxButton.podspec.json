@@ -18,7 +18,7 @@
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*",
   "resource_bundles": {
-    "JZtvOSParallaxButton": [
+    "JZParallaxButton": [
       "Pod/Assets/*.png"
     ]
   }

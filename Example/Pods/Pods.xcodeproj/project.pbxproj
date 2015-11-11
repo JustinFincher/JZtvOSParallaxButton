@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A09DB811720E1076E8E464A01296B85 /* JZParallaxButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3660B762BF9DA285D8F3ABFB8C087CC5 /* JZParallaxButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E363F39D8358683562619F5DF5D7DDC /* JZtvOSParallaxButton.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1D05B72D61F8E358BC4AC3CD90224561 /* JZtvOSParallaxButton.bundle */; };
+		04F271E582F41A63404CB3A44F817FC0 /* JZParallaxButton.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C30323BFD62CC4E4D11CE3E6BFEAA008 /* JZParallaxButton.bundle */; };
+		2DFA2C73B9E8070902D8AC11024E9D14 /* Spotlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 995189B8A8F61BBBA3DA6D176855A199 /* Spotlight.png */; };
 		31910F7AF1DF898C482DE542A800A9E2 /* Pods-JZtvOSParallaxButton_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BC6FD24D6A6CA9FC8EA87916CEE01335 /* Pods-JZtvOSParallaxButton_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		413D7DBB2A6A275F55345A7D86DD0FBC /* Spotlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 995189B8A8F61BBBA3DA6D176855A199 /* Spotlight.png */; };
-		790A90162C4E6D6E13783C9ECA673876 /* JZtvOSParallaxButton-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A6C93E3844208E827EC9F8FD6F13AC /* JZtvOSParallaxButton-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		85B2A1A6B79DFB888FF996B3766C4184 /* JZtvOSParallaxButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C155A1E75B010330A2F191DBFFB39833 /* JZtvOSParallaxButton-dummy.m */; };
-		A05826993DEBAC807A4F48FF80192B22 /* Spotlight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D864CD23CE6466E5D34E4C4B9BEA935 /* Spotlight@3x.png */; };
+		35A627314EBD4F3525228ED4E5E2B39E /* JZParallaxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2EE3D3470345F8F772C284CC0FB03 /* JZParallaxButton.m */; };
+		4477F7BB96B6CF8E481CF017D78267B8 /* JZParallaxButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3660B762BF9DA285D8F3ABFB8C087CC5 /* JZParallaxButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		545325A52698167F3045DD6A82A146FD /* JZtvOSParallaxButton-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A6C93E3844208E827EC9F8FD6F13AC /* JZtvOSParallaxButton-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2084EA39B091FAC31CC6357CF0FBABF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		A563A690FA6611F710386272D43D6408 /* Pods-JZtvOSParallaxButton_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7F5F6CD0749DAF1863294FC81CF3CE /* Pods-JZtvOSParallaxButton_Tests-dummy.m */; };
-		A92FE4991C5FC985765A6891CE583842 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		AF98EF5D86EAE8E4F60C620006973F4A /* JZtvOSParallaxButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C155A1E75B010330A2F191DBFFB39833 /* JZtvOSParallaxButton-dummy.m */; };
 		C6390A37BB716707FA48C0B394184503 /* Pods-JZtvOSParallaxButton_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7547D852BFE46627202A69C8AEE2A101 /* Pods-JZtvOSParallaxButton_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C869B77DBFDD699B6C5AF380ED6954A1 /* Spotlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F221CD895EC43155B38E4DCBC14B1C1C /* Spotlight@2x.png */; };
 		CA3959D3C611AB872A6C64E7E04F1199 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		D08497F9ED7FB1823DCA62E2F74DDD84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		E55D09CD6AEBEB30487AED6ED287C825 /* Spotlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F221CD895EC43155B38E4DCBC14B1C1C /* Spotlight@2x.png */; };
-		F203C6DA1DC7E5C515DD354043A80616 /* JZParallaxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2EE3D3470345F8F772C284CC0FB03 /* JZParallaxButton.m */; };
 		F21B8ABEC72AF986A01FA3A3B6922D65 /* Pods-JZtvOSParallaxButton_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B212194B550BECAF5B3427F8E8289D /* Pods-JZtvOSParallaxButton_Example-dummy.m */; };
+		F7073CB3B2E59590857486D910863928 /* Spotlight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D864CD23CE6466E5D34E4C4B9BEA935 /* Spotlight@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,28 +29,27 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 196CDFF7EC70CBA11695F6C7F1C60D9C;
+			remoteGlobalIDString = CEB3BD52DBA4D05A365D7F4B25381A4A;
 			remoteInfo = JZtvOSParallaxButton;
 		};
-		D0E3A1432B69FF51E5853C57BA90E0E8 /* PBXContainerItemProxy */ = {
+		56B60BE94A2D3BBDC29CD8A4CA48A959 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E7CFCC5CFF57F61C4DE77B305EE660C7;
-			remoteInfo = "JZtvOSParallaxButton-JZtvOSParallaxButton";
+			remoteGlobalIDString = F9A8BD0231FDDF4021053307F896D75A;
+			remoteInfo = "JZtvOSParallaxButton-JZParallaxButton";
 		};
 		F6535C13164973596FDBB2F9C8B2E82E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 196CDFF7EC70CBA11695F6C7F1C60D9C;
+			remoteGlobalIDString = CEB3BD52DBA4D05A365D7F4B25381A4A;
 			remoteInfo = JZtvOSParallaxButton;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		08B1CF3C5F91A2C7F58A283FA0C1B44A /* JZtvOSParallaxButton-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JZtvOSParallaxButton-prefix.pch"; sourceTree = "<group>"; };
-		1D05B72D61F8E358BC4AC3CD90224561 /* JZtvOSParallaxButton.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JZtvOSParallaxButton.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE18F65DE1569E346934AC26B146BA0 /* Pods-JZtvOSParallaxButton_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JZtvOSParallaxButton_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		2BCA7CCAC240BC129F4289DAFDCA7B60 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32C0C432A4DFB21ACD03011B86D1309A /* Pods-JZtvOSParallaxButton_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JZtvOSParallaxButton_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,8 +61,8 @@
 		6C7563A81BF1EB71B607FF591F7532F6 /* Pods-JZtvOSParallaxButton_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JZtvOSParallaxButton_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		752C4F6CEFDC672B155A8750D12B553C /* Pods-JZtvOSParallaxButton_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JZtvOSParallaxButton_Example-frameworks.sh"; sourceTree = "<group>"; };
 		7547D852BFE46627202A69C8AEE2A101 /* Pods-JZtvOSParallaxButton_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JZtvOSParallaxButton_Tests-umbrella.h"; sourceTree = "<group>"; };
+		7D0BE4AE8EEBD12A668EBF4C91154C0D /* JZtvOSParallaxButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JZtvOSParallaxButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DF5CAE803E931A25EA2CB7EDDCD36C5 /* Pods-JZtvOSParallaxButton_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-JZtvOSParallaxButton_Tests.modulemap"; sourceTree = "<group>"; };
-		804D510337139B3AC81F642511916054 /* Pods_JZtvOSParallaxButton_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JZtvOSParallaxButton_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		818CBCC070507D45530C510100ED8A0F /* Pods-JZtvOSParallaxButton_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JZtvOSParallaxButton_Example-resources.sh"; sourceTree = "<group>"; };
 		81B212194B550BECAF5B3427F8E8289D /* Pods-JZtvOSParallaxButton_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JZtvOSParallaxButton_Example-dummy.m"; sourceTree = "<group>"; };
 		833412615962FABEA29FADD15D9C909A /* Pods-JZtvOSParallaxButton_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JZtvOSParallaxButton_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,23 +72,24 @@
 		ACE026ED718ECA1AD0AC036572DC0E92 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2ECD314E697542F5E3A7073393DCAB9 /* Pods-JZtvOSParallaxButton_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-JZtvOSParallaxButton_Example.modulemap"; sourceTree = "<group>"; };
 		B30CD8C6E1DD358CDFD187872877B584 /* JZtvOSParallaxButton.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = JZtvOSParallaxButton.modulemap; sourceTree = "<group>"; };
-		B9DD721E099C5BD4EE9DBCDB3F0BAA1A /* Pods_JZtvOSParallaxButton_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JZtvOSParallaxButton_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BC6FD24D6A6CA9FC8EA87916CEE01335 /* Pods-JZtvOSParallaxButton_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JZtvOSParallaxButton_Example-umbrella.h"; sourceTree = "<group>"; };
 		C155A1E75B010330A2F191DBFFB39833 /* JZtvOSParallaxButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JZtvOSParallaxButton-dummy.m"; sourceTree = "<group>"; };
+		C30323BFD62CC4E4D11CE3E6BFEAA008 /* JZParallaxButton.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JZParallaxButton.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7F5F6CD0749DAF1863294FC81CF3CE /* Pods-JZtvOSParallaxButton_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JZtvOSParallaxButton_Tests-dummy.m"; sourceTree = "<group>"; };
 		D1EA5DADD4CEEAF93340FF1FEC52AF5C /* Pods-JZtvOSParallaxButton_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JZtvOSParallaxButton_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		D94233E78CADD3CF28D8ED03186A6D7A /* Pods_JZtvOSParallaxButton_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JZtvOSParallaxButton_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC2EE3D3470345F8F772C284CC0FB03 /* JZParallaxButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = JZParallaxButton.m; sourceTree = "<group>"; };
+		E6746D7C0C4D7FC406B33524DA49F16E /* Pods_JZtvOSParallaxButton_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JZtvOSParallaxButton_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB1CE7DC32740A45677C0163A4BDAAD /* Pods-JZtvOSParallaxButton_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JZtvOSParallaxButton_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		F221CD895EC43155B38E4DCBC14B1C1C /* Spotlight@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Spotlight@2x.png"; sourceTree = "<group>"; };
 		F6FA3184E0C76B4BEC28DAE40D70C0D6 /* Pods-JZtvOSParallaxButton_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JZtvOSParallaxButton_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		FA0D9EA4B47265FDEA8666AA599248DC /* JZtvOSParallaxButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JZtvOSParallaxButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6729402CD4EC2E28DC49FFD9E043E7 /* Pods-JZtvOSParallaxButton_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JZtvOSParallaxButton_Tests-resources.sh"; sourceTree = "<group>"; };
 		FEA4EE3CE073DFFE0F0F3DDE450D4B47 /* Pods-JZtvOSParallaxButton_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JZtvOSParallaxButton_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		40056A95CB78EDD8813B24A55A63A4B5 /* Frameworks */ = {
+		35B903ADBAD11C444B1A200CABD08DED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -104,19 +104,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CA5E8D1D1BFE49BCCF46E77573663B00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2084EA39B091FAC31CC6357CF0FBABF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E910660F186769447F1CF3F8DFF7E227 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D08497F9ED7FB1823DCA62E2F74DDD84 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9D9BCEBA1CED38BF2A5111636848D5B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A92FE4991C5FC985765A6891CE583842 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +174,7 @@
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				CD5C85B16413EE6382206B7300DB8AEB /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				F8FA052D44C9D5A57ED978F0FBF9FD4E /* Products */,
+				8FFF8820F24854BF36A0ECC19BAFD91B /* Products */,
 				B778F6C0B615AF006C8E2D017E53CF4F /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -187,6 +187,17 @@
 				4D864CD23CE6466E5D34E4C4B9BEA935 /* Spotlight@3x.png */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		8FFF8820F24854BF36A0ECC19BAFD91B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C30323BFD62CC4E4D11CE3E6BFEAA008 /* JZParallaxButton.bundle */,
+				7D0BE4AE8EEBD12A668EBF4C91154C0D /* JZtvOSParallaxButton.framework */,
+				E6746D7C0C4D7FC406B33524DA49F16E /* Pods_JZtvOSParallaxButton_Example.framework */,
+				D94233E78CADD3CF28D8ED03186A6D7A /* Pods_JZtvOSParallaxButton_Tests.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B6A0DE8EF34A941A87C18C16BA1CCBC0 /* Pods-JZtvOSParallaxButton_Tests */ = {
@@ -271,17 +282,6 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		F8FA052D44C9D5A57ED978F0FBF9FD4E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1D05B72D61F8E358BC4AC3CD90224561 /* JZtvOSParallaxButton.bundle */,
-				FA0D9EA4B47265FDEA8666AA599248DC /* JZtvOSParallaxButton.framework */,
-				B9DD721E099C5BD4EE9DBCDB3F0BAA1A /* Pods_JZtvOSParallaxButton_Example.framework */,
-				804D510337139B3AC81F642511916054 /* Pods_JZtvOSParallaxButton_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -293,12 +293,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8FCBC9BFD787B6D1948B8A703A3144CB /* Headers */ = {
+		62AC735E66B5E39CD580AC4CBE383149 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A09DB811720E1076E8E464A01296B85 /* JZParallaxButton.h in Headers */,
-				790A90162C4E6D6E13783C9ECA673876 /* JZtvOSParallaxButton-umbrella.h in Headers */,
+				4477F7BB96B6CF8E481CF017D78267B8 /* JZParallaxButton.h in Headers */,
+				545325A52698167F3045DD6A82A146FD /* JZtvOSParallaxButton-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,25 +313,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		196CDFF7EC70CBA11695F6C7F1C60D9C /* JZtvOSParallaxButton */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D58144EC9ED756D943B2F2B6D677A581 /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton" */;
-			buildPhases = (
-				AAE9DAE74C18FB6CAE1B7B16853124DC /* Sources */,
-				F9D9BCEBA1CED38BF2A5111636848D5B /* Frameworks */,
-				79CAE238D7165B3741ED2B317158F90B /* Resources */,
-				8FCBC9BFD787B6D1948B8A703A3144CB /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				727A199FDF75263046F1BC94C5FCEA29 /* PBXTargetDependency */,
-			);
-			name = JZtvOSParallaxButton;
-			productName = JZtvOSParallaxButton;
-			productReference = FA0D9EA4B47265FDEA8666AA599248DC /* JZtvOSParallaxButton.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		1E88063775E18B2DCE57DEA9E47DDD6F /* Pods-JZtvOSParallaxButton_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D1D904C89B24985D49185062315FBCD /* Build configuration list for PBXNativeTarget "Pods-JZtvOSParallaxButton_Example" */;
@@ -347,7 +328,7 @@
 			);
 			name = "Pods-JZtvOSParallaxButton_Example";
 			productName = "Pods-JZtvOSParallaxButton_Example";
-			productReference = B9DD721E099C5BD4EE9DBCDB3F0BAA1A /* Pods_JZtvOSParallaxButton_Example.framework */;
+			productReference = E6746D7C0C4D7FC406B33524DA49F16E /* Pods_JZtvOSParallaxButton_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		A396498F856C02F52EC1618816C7DCC6 /* Pods-JZtvOSParallaxButton_Tests */ = {
@@ -365,24 +346,43 @@
 			);
 			name = "Pods-JZtvOSParallaxButton_Tests";
 			productName = "Pods-JZtvOSParallaxButton_Tests";
-			productReference = 804D510337139B3AC81F642511916054 /* Pods_JZtvOSParallaxButton_Tests.framework */;
+			productReference = D94233E78CADD3CF28D8ED03186A6D7A /* Pods_JZtvOSParallaxButton_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E7CFCC5CFF57F61C4DE77B305EE660C7 /* JZtvOSParallaxButton-JZtvOSParallaxButton */ = {
+		CEB3BD52DBA4D05A365D7F4B25381A4A /* JZtvOSParallaxButton */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 85534B5A9B8ECE8DD26A4C4173EC8E76 /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton-JZtvOSParallaxButton" */;
+			buildConfigurationList = A27B51011128AF31B15D0A446C59F5FE /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton" */;
 			buildPhases = (
-				8BB21C9B08783CED5DAA001FCEB96276 /* Sources */,
-				40056A95CB78EDD8813B24A55A63A4B5 /* Frameworks */,
-				12B8860F6C0C938478C63656B9691870 /* Resources */,
+				6A40CE1660E4AA791762861BD5EBFCDA /* Sources */,
+				CA5E8D1D1BFE49BCCF46E77573663B00 /* Frameworks */,
+				5E329C8FA715CBB3F5547065D3FBD09A /* Resources */,
+				62AC735E66B5E39CD580AC4CBE383149 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47D33E21FDF64C70D7AA8F429531A46D /* PBXTargetDependency */,
+			);
+			name = JZtvOSParallaxButton;
+			productName = JZtvOSParallaxButton;
+			productReference = 7D0BE4AE8EEBD12A668EBF4C91154C0D /* JZtvOSParallaxButton.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F9A8BD0231FDDF4021053307F896D75A /* JZtvOSParallaxButton-JZParallaxButton */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E22CED2719B1D0D793D0B5174911E94 /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton-JZParallaxButton" */;
+			buildPhases = (
+				CB341BFDAF324CFCE8B5A8F872CC0AAA /* Sources */,
+				35B903ADBAD11C444B1A200CABD08DED /* Frameworks */,
+				6EB5096AAB71123A5D4DC0BA590643E8 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "JZtvOSParallaxButton-JZtvOSParallaxButton";
-			productName = "JZtvOSParallaxButton-JZtvOSParallaxButton";
-			productReference = 1D05B72D61F8E358BC4AC3CD90224561 /* JZtvOSParallaxButton.bundle */;
+			name = "JZtvOSParallaxButton-JZParallaxButton";
+			productName = "JZtvOSParallaxButton-JZParallaxButton";
+			productReference = C30323BFD62CC4E4D11CE3E6BFEAA008 /* JZParallaxButton.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -402,12 +402,12 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = F8FA052D44C9D5A57ED978F0FBF9FD4E /* Products */;
+			productRefGroup = 8FFF8820F24854BF36A0ECC19BAFD91B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				196CDFF7EC70CBA11695F6C7F1C60D9C /* JZtvOSParallaxButton */,
-				E7CFCC5CFF57F61C4DE77B305EE660C7 /* JZtvOSParallaxButton-JZtvOSParallaxButton */,
+				CEB3BD52DBA4D05A365D7F4B25381A4A /* JZtvOSParallaxButton */,
+				F9A8BD0231FDDF4021053307F896D75A /* JZtvOSParallaxButton-JZParallaxButton */,
 				1E88063775E18B2DCE57DEA9E47DDD6F /* Pods-JZtvOSParallaxButton_Example */,
 				A396498F856C02F52EC1618816C7DCC6 /* Pods-JZtvOSParallaxButton_Tests */,
 			);
@@ -415,21 +415,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		12B8860F6C0C938478C63656B9691870 /* Resources */ = {
+		5E329C8FA715CBB3F5547065D3FBD09A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				413D7DBB2A6A275F55345A7D86DD0FBC /* Spotlight.png in Resources */,
-				E55D09CD6AEBEB30487AED6ED287C825 /* Spotlight@2x.png in Resources */,
-				A05826993DEBAC807A4F48FF80192B22 /* Spotlight@3x.png in Resources */,
+				04F271E582F41A63404CB3A44F817FC0 /* JZParallaxButton.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		79CAE238D7165B3741ED2B317158F90B /* Resources */ = {
+		6EB5096AAB71123A5D4DC0BA590643E8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E363F39D8358683562619F5DF5D7DDC /* JZtvOSParallaxButton.bundle in Resources */,
+				2DFA2C73B9E8070902D8AC11024E9D14 /* Spotlight.png in Resources */,
+				C869B77DBFDD699B6C5AF380ED6954A1 /* Spotlight@2x.png in Resources */,
+				F7073CB3B2E59590857486D910863928 /* Spotlight@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,19 +444,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8BB21C9B08783CED5DAA001FCEB96276 /* Sources */ = {
+		6A40CE1660E4AA791762861BD5EBFCDA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35A627314EBD4F3525228ED4E5E2B39E /* JZParallaxButton.m in Sources */,
+				AF98EF5D86EAE8E4F60C620006973F4A /* JZtvOSParallaxButton-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AAE9DAE74C18FB6CAE1B7B16853124DC /* Sources */ = {
+		CB341BFDAF324CFCE8B5A8F872CC0AAA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F203C6DA1DC7E5C515DD354043A80616 /* JZParallaxButton.m in Sources */,
-				85B2A1A6B79DFB888FF996B3766C4184 /* JZtvOSParallaxButton-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,20 +474,20 @@
 		1F9A506705A8C2621A3040790AE884EA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JZtvOSParallaxButton;
-			target = 196CDFF7EC70CBA11695F6C7F1C60D9C /* JZtvOSParallaxButton */;
+			target = CEB3BD52DBA4D05A365D7F4B25381A4A /* JZtvOSParallaxButton */;
 			targetProxy = F6535C13164973596FDBB2F9C8B2E82E /* PBXContainerItemProxy */;
+		};
+		47D33E21FDF64C70D7AA8F429531A46D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JZtvOSParallaxButton-JZParallaxButton";
+			target = F9A8BD0231FDDF4021053307F896D75A /* JZtvOSParallaxButton-JZParallaxButton */;
+			targetProxy = 56B60BE94A2D3BBDC29CD8A4CA48A959 /* PBXContainerItemProxy */;
 		};
 		4CF62D96EBA44499A28B7B2C0F7513C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JZtvOSParallaxButton;
-			target = 196CDFF7EC70CBA11695F6C7F1C60D9C /* JZtvOSParallaxButton */;
+			target = CEB3BD52DBA4D05A365D7F4B25381A4A /* JZtvOSParallaxButton */;
 			targetProxy = 31559FC32F70622EB53A120E09114C32 /* PBXContainerItemProxy */;
-		};
-		727A199FDF75263046F1BC94C5FCEA29 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "JZtvOSParallaxButton-JZtvOSParallaxButton";
-			target = E7CFCC5CFF57F61C4DE77B305EE660C7 /* JZtvOSParallaxButton-JZtvOSParallaxButton */;
-			targetProxy = D0E3A1432B69FF51E5853C57BA90E0E8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -565,18 +565,6 @@
 			};
 			name = Debug;
 		};
-		1645F5CECAC80C074EC095E70E137718 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A45A640C8E448F5BB09D87B2E24BEA38 /* JZtvOSParallaxButton.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = JZtvOSParallaxButton;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
 		40E5FA1DF8018992EF8DC290DE12A738 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 833412615962FABEA29FADD15D9C909A /* Pods-JZtvOSParallaxButton_Example.debug.xcconfig */;
@@ -599,6 +587,33 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = Pods_JZtvOSParallaxButton_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		40E9BEA7E9B14D71D45B5FDCBA5B1A76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A45A640C8E448F5BB09D87B2E24BEA38 /* JZtvOSParallaxButton.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JZtvOSParallaxButton/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = JZtvOSParallaxButton;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -667,60 +682,6 @@
 			};
 			name = Release;
 		};
-		60CBDEA160996F0A2A11C897310F1F81 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A45A640C8E448F5BB09D87B2E24BEA38 /* JZtvOSParallaxButton.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JZtvOSParallaxButton/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = JZtvOSParallaxButton;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		71B56EE230F18A4AF42C906847967AFB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A45A640C8E448F5BB09D87B2E24BEA38 /* JZtvOSParallaxButton.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JZtvOSParallaxButton/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = JZtvOSParallaxButton;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		9CEFA30B225159617E2A0706C923167D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A7BAEA663F0BDFB40EB213EBD46E8A2 /* Pods-JZtvOSParallaxButton_Tests.debug.xcconfig */;
@@ -751,21 +712,69 @@
 			};
 			name = Debug;
 		};
-		A16ED542E9737EF4C0469EAAD3AA15D5 /* Release */ = {
+		C3A01379D14E8599DDB952AFB96F285C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A45A640C8E448F5BB09D87B2E24BEA38 /* JZtvOSParallaxButton.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = JZtvOSParallaxButton;
+				PRODUCT_NAME = JZParallaxButton;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		C93B2A00FD2007C7E4650353146CC7B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A45A640C8E448F5BB09D87B2E24BEA38 /* JZtvOSParallaxButton.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = JZParallaxButton;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
+		E63B832EB2B03CB7F05CB310705F14C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A45A640C8E448F5BB09D87B2E24BEA38 /* JZtvOSParallaxButton.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JZtvOSParallaxButton/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JZtvOSParallaxButton/JZtvOSParallaxButton.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = JZtvOSParallaxButton;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1E22CED2719B1D0D793D0B5174911E94 /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton-JZParallaxButton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3A01379D14E8599DDB952AFB96F285C /* Debug */,
+				C93B2A00FD2007C7E4650353146CC7B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D1D904C89B24985D49185062315FBCD /* Build configuration list for PBXNativeTarget "Pods-JZtvOSParallaxButton_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -784,11 +793,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		85534B5A9B8ECE8DD26A4C4173EC8E76 /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton-JZtvOSParallaxButton" */ = {
+		A27B51011128AF31B15D0A446C59F5FE /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1645F5CECAC80C074EC095E70E137718 /* Debug */,
-				A16ED542E9737EF4C0469EAAD3AA15D5 /* Release */,
+				40E9BEA7E9B14D71D45B5FDCBA5B1A76 /* Debug */,
+				E63B832EB2B03CB7F05CB310705F14C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -798,15 +807,6 @@
 			buildConfigurations = (
 				9CEFA30B225159617E2A0706C923167D /* Debug */,
 				49CED0D972F7A7CBCE874D90EB46A731 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D58144EC9ED756D943B2F2B6D677A581 /* Build configuration list for PBXNativeTarget "JZtvOSParallaxButton" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				71B56EE230F18A4AF42C906847967AFB /* Debug */,
-				60CBDEA160996F0A2A11C897310F1F81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
