@@ -1,0 +1,6 @@
+framework module JZtvOSParallaxButtom {
+  umbrella header "JZtvOSParallaxButtom-umbrella.h"
+
+  export *
+  module * { export * }
+}
