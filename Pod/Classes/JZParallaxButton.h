@@ -15,11 +15,6 @@
 //当前Button包含的所有ImageLayer
 @property (nonatomic) NSMutableArray *LayerArray;
 
-
-
-//视差效果大小
-@property (nonatomic) CGFloat ParallaxEffectParameter;
-
 //button圆角
 @property (nonatomic) BOOL RoundCornerEnabled;
 

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E08BD9B326A4FCF2352BE714'
+               BlueprintIdentifier = '72771BC056948715E662D17B'
                BlueprintName = 'Pods-JZtvOSParallaxButton_Tests'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_JZtvOSParallaxButton_Tests.framework'>

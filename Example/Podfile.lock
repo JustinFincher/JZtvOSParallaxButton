@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  JZtvOSParallaxButton: bfa5479ec8b9e4f94e8ddea49dfd9bcf84f942bd
+  JZtvOSParallaxButton: e7a1d24fa9d602429c587452c1e48f9ba00fc5e7
 
 COCOAPODS: 0.39.0

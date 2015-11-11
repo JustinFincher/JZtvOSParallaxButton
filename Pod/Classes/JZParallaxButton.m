@@ -15,15 +15,20 @@
 
 
 //TranslationParameter: Level ++ , TranslationParameter ++
-#define TranslationParameter  (float)([LayerArray count] * 2 - i)/(float)([LayerArray count] * 2)
+#define OutTranslationParameter  (float)([LayerArray count] + i)/(float)([LayerArray count] * 2)
+#define InTranslationParameter  (float)(i)/(float)([LayerArray count])
 
 //ScaleParameter: Level ++ , ScaleParameter ++
-#define ScaleParameter  ScaleBase+ScaleAddition/5*((float)i/(float)([LayerArray count]))
+#define OutScaleParameter  ScaleBase+ScaleAddition/5*((float)i/(float)([LayerArray count]))
+#define InScaleParameter  1+ScaleAddition/10*((float)i/(float)([LayerArray count]))
 
 //RotateParameter:
-#define RotateParameter 0.4
+#define RotateParameter 0.5
 #define SpotlightOutRange 5.0f
-#define zPositionMax 9999
+#define zPositionMax 800
+
+#define BoundsVieTranslation 50
+#define LayerVieTranslation 20
 
 
 #import "JZParallaxButton.h"
@@ -34,17 +39,18 @@
 @property int RotationNowStep;
 @property NSTimer *RotationTimer;
 @property UIImageView *SpotLightView;
+@property UIView *BoundsView;
 
 @end
 
 @implementation JZParallaxButton
 
 @synthesize LayerArray;
-@synthesize ParallaxEffectParameter;
 @synthesize SpotLightView;
 @synthesize RoundCornerEnabled,RoundCornerRadius;
 @synthesize isParallax;
 @synthesize RotationInterval,RotationNowStep,RotationAllSteps,RotationTimer;
+@synthesize BoundsView;
 @synthesize ScaleAddition,ScaleBase;
 
 - (instancetype)initButtonWithCGRect:(CGRect)RectInfo
@@ -58,29 +64,37 @@
     self.RotationInterval = Interval;
     self.RoundCornerEnabled = isRoundCorner;
     self.RoundCornerRadius = Radius;
-    self.ScaleBase = 1.0f;
-    self.ScaleAddition = 1.0f;
+    self.ScaleBase = 1.1f;
+    self.ScaleAddition = 0.4f;
 
     
     LayerArray = [[NSMutableArray alloc] initWithCapacity:[ArrayOfLayer count]];
     
     self = [super initWithFrame:RectInfo];
     
+    BoundsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    BoundsView.layer.masksToBounds = YES;
+    BoundsView.layer.shouldRasterize = TRUE;
+    BoundsView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    if (self.RoundCornerEnabled)
+    {
+        BoundsView.layer.cornerRadius = self.RoundCornerRadius;
+    }
+    [self addSubview:BoundsView];
+    
+    
     for (int i = 0; i < [ArrayOfLayer count]; i++)
     {
         UIImageView *LayerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         UIImage *LayerImage = [ArrayOfLayer objectAtIndex:i];
         [LayerImageView setImage:LayerImage];
+        LayerImageView.layer.shouldRasterize = TRUE;
+        LayerImageView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         
         //从下往上添加
-        [self addSubview:LayerImageView];
+        [BoundsView addSubview:LayerImageView];
         [LayerArray addObject:LayerImageView];
         
-        if (self.RoundCornerEnabled)
-        {
-            LayerImageView.layer.masksToBounds = YES;
-            LayerImageView.layer.cornerRadius = self.RoundCornerRadius;
-        }
         
         if (i == [ArrayOfLayer count] - 1)
         {
@@ -94,7 +108,7 @@
             SpotLightView.image = [UIImage imageNamed:@"Spotlight" inBundle:bundle compatibleWithTraitCollection:nil];
             SpotLightView.contentMode = UIViewContentModeScaleAspectFit;
             SpotLightView.layer.masksToBounds = YES;
-            [LayerImageView addSubview:SpotLightView];
+            [BoundsView addSubview:SpotLightView];
             SpotLightView.layer.zPosition = zPositionMax;
             [self bringSubviewToFront:SpotLightView];
             SpotLightView.alpha = 0.0;
@@ -117,7 +131,7 @@
 {
     if(sender.state == UIGestureRecognizerStateBegan)
     {
-        NSLog(@"Long Press");
+        //NSlog(@"Long Press");
         
         if (isParallax)
         {
@@ -139,7 +153,7 @@
         UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
         //从下往上的z位置++
         LayerImageView.layer.transform = CATransform3DMakeTranslation(0, 0, i*30);
-        LayerImageView.layer.zPosition = i*30;
+        LayerImageView.layer.zPosition = i*10;
     }
  
     [self AddShadow];
@@ -176,17 +190,31 @@
 {
     [self EndRotation];
     
+    CATransform3D NewRotate = CATransform3DConcat(CATransform3DMakeRotation(0, 0, 1, 0), CATransform3DMakeRotation(0, 1, 0, 0));
+    CATransform3D NewTranslation = CATransform3DMakeTranslation(0,0, 0);
+    
+    
+    CABasicAnimation *BoundsViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    BoundsViewCABasicAnimation.duration = 0.4f;
+    BoundsViewCABasicAnimation.autoreverses = NO;
+    BoundsViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DConcat(NewRotate,NewTranslation)];
+    BoundsViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:BoundsView.layer.transform];
+    BoundsViewCABasicAnimation.fillMode = kCAFillModeBoth;
+    BoundsViewCABasicAnimation.removedOnCompletion = YES;
+    [BoundsView.layer addAnimation:BoundsViewCABasicAnimation forKey:@"BoundsViewCABasicAnimation"];
+    BoundsView.layer.transform = CATransform3DPerspect(CATransform3DConcat(NewRotate,NewTranslation), CGPointMake(0, 0), zPositionMax);
+    
+
+    
+    
     for (int i = 0 ; i < [LayerArray count]; i++)
     {
         UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
         CATransform3D NowTransform = LayerImageView.layer.transform;
-        
-        CATransform3D NewRotate = CATransform3DConcat(CATransform3DMakeRotation(0, 0, 1, 0), CATransform3DMakeRotation(0, 1, 0, 0));
+
         CATransform3D NewTranslation = CATransform3DMakeTranslation(0, 0, 0);
         CATransform3D NewScale = CATransform3DMakeScale(1, 1, 1);
-        
-        CATransform3D NewTwoTransform = CATransform3DConcat(NewRotate,NewTranslation);
-        CATransform3D NewAllTransform = CATransform3DConcat(NewTwoTransform,NewScale);
+        CATransform3D NewAllTransform = CATransform3DConcat(NewTranslation,NewScale);
         
         CABasicAnimation *LayerImageViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
         LayerImageViewCABasicAnimation.duration = 0.4f;
@@ -196,7 +224,6 @@
         LayerImageViewCABasicAnimation.fillMode = kCAFillModeBoth;
         LayerImageViewCABasicAnimation.removedOnCompletion = YES;
         
-        
         CAAnimationGroup *animGroup = [CAAnimationGroup animation];
         animGroup.animations = [NSArray arrayWithObjects:LayerImageViewCABasicAnimation, nil];
         animGroup.duration = 0.4f;
@@ -205,7 +232,7 @@
         animGroup.fillMode = kCAFillModeRemoved;
         
         [CATransaction begin];
-        LayerImageView.layer.transform = CATransform3DPerspect(NewAllTransform, CGPointMake(0, 0), 1000);
+        LayerImageView.layer.transform = CATransform3DPerspect(NewAllTransform, CGPointMake(0, 0), zPositionMax);
         [CATransaction setCompletionBlock:^
          {
              if (i == [LayerArray count] - 1)
@@ -235,36 +262,47 @@
     
     CGFloat PIE = 0;
     CGFloat Degress = M_PI*2*PIE;
-    NSLog(@"Degress : %f PIE",PIE);
+    //NSlog(@"Degress : %f PIE",PIE);
     CGFloat Sin = sin(Degress)/4;
     CGFloat Cos = cos(Degress)/4;
     
+    int i =0;
+    CATransform3D NewRotate,NewTranslation,NewScale;
+    NewRotate = CATransform3DConcat(CATransform3DMakeRotation(-Sin*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(Cos*RotateParameter, 1, 0, 0));
+    NewTranslation = CATransform3DMakeTranslation(Sin*BoundsVieTranslation*OutTranslationParameter, Cos*BoundsVieTranslation*OutTranslationParameter, 0);
+    NewScale = CATransform3DMakeScale(OutScaleParameter, OutScaleParameter, 1);
+    
+    CATransform3D TwoTransform = CATransform3DConcat(NewRotate,NewTranslation);
+    CATransform3D AllTransform = CATransform3DConcat(TwoTransform,NewScale);
+    
+    CABasicAnimation *BoundsLayerCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    BoundsLayerCABasicAnimation.duration = 0.4f;
+    BoundsLayerCABasicAnimation.autoreverses = NO;
+    BoundsLayerCABasicAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax)];
+    BoundsLayerCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:BoundsView.layer.transform];
+    BoundsLayerCABasicAnimation.fillMode = kCAFillModeBoth;
+    BoundsLayerCABasicAnimation.removedOnCompletion = YES;
+    [BoundsView.layer addAnimation:BoundsLayerCABasicAnimation forKey:@"BoundsLayerCABasicAnimation"];
+    BoundsView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
     
     for (int i = 0 ; i < [LayerArray count]; i++)
     {
         
         UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
 
-        
-        CATransform3D NewRotate ;
         CATransform3D NewTranslation ;
-        CATransform3D NewScale = CATransform3DMakeScale(ScaleParameter, ScaleParameter, 1);
+        CATransform3D NewScale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);
         
         if (i == [LayerArray count] - 1) //is spotlight
         {
-            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(Sin*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-Cos*RotateParameter, 1, 0, 0));
-            NewTranslation = CATransform3DMakeTranslation(-Sin*100*TranslationParameter*SpotlightOutRange, -Cos*100*TranslationParameter*SpotlightOutRange, 0);
+            NewTranslation = CATransform3DMakeTranslation(Sin*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, Cos*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, 0);
         }
         else
         {
-            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(-Sin*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(Cos*RotateParameter, 1, 0, 0));
-            NewTranslation = CATransform3DMakeTranslation(Sin*100*TranslationParameter, Cos*100*TranslationParameter, 0);
-
+            NewTranslation = CATransform3DMakeTranslation(-Sin*LayerVieTranslation*InTranslationParameter, -Cos*LayerVieTranslation*InTranslationParameter, 0);
         }
         
-        CATransform3D NewTwoTransform = CATransform3DConcat(NewRotate,NewTranslation);
-        CATransform3D NewAllTransform = CATransform3DConcat(NewTwoTransform,NewScale);
-        
+        CATransform3D NewAllTransform = CATransform3DConcat(NewTranslation,NewScale);
         
         CABasicAnimation *LayerImageViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
         LayerImageViewCABasicAnimation.duration = 0.4f;
@@ -276,14 +314,14 @@
         
         
         CAAnimationGroup *animGroup = [CAAnimationGroup animation];
-        animGroup.animations = [NSArray arrayWithObjects:LayerImageViewCABasicAnimation, nil];
+        animGroup.animations = [NSArray arrayWithObjects:LayerImageViewCABasicAnimation,nil];
         animGroup.duration = 0.4f;
         animGroup.removedOnCompletion = YES;
         animGroup.autoreverses = NO;
         animGroup.fillMode = kCAFillModeRemoved;
         
         [CATransaction begin];
-        LayerImageView.layer.transform = CATransform3DPerspect(NewAllTransform, CGPointMake(0, 0), 1000);
+        LayerImageView.layer.transform = CATransform3DPerspect(NewAllTransform, CGPointMake(0, 0), zPositionMax);
         [CATransaction setCompletionBlock:^
          {
              if (i == [LayerArray count] - 1)
@@ -303,7 +341,7 @@
 - (void)RotationCreator
 {
  
-    NSLog(@"RotationNowStep : %d of %d",RotationNowStep,RotationAllSteps);
+    //NSlog(@"RotationNowStep : %d of %d",RotationNowStep,RotationAllSteps);
     if (RotationNowStep == RotationAllSteps)
     {
         RotationNowStep = 1;
@@ -315,10 +353,19 @@
     
     CGFloat PIE = (float)RotationNowStep/(float)RotationAllSteps;
     CGFloat Degress = M_PI*2*PIE;
-    NSLog(@"Degress : %f PIE",PIE);
+    //NSlog(@"Degress : %f PIE",PIE);
     CGFloat Sin = sin(Degress)/4;
     CGFloat Cos = cos(Degress)/4;
     
+    int i = 0;
+    CATransform3D NewRotate,NewTranslation,NewScale;
+    NewRotate = CATransform3DConcat(CATransform3DMakeRotation(-Sin*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(Cos*RotateParameter, 1, 0, 0));
+    NewTranslation = CATransform3DMakeTranslation(Sin*BoundsVieTranslation*OutTranslationParameter, Cos*BoundsVieTranslation*OutTranslationParameter, 0);
+    NewScale = CATransform3DMakeScale(OutScaleParameter, OutScaleParameter, 1);
+    
+    CATransform3D TwoTransform = CATransform3DConcat(NewRotate,NewTranslation);
+    CATransform3D AllTransform = CATransform3DConcat(TwoTransform,NewScale);
+    BoundsView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
     
     for (int i = 0 ; i < [LayerArray count]; i++)
     {
@@ -326,27 +373,21 @@
         {
             UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
             
-            CATransform3D Rotate = CATransform3DConcat(CATransform3DMakeRotation(Sin*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-Cos*RotateParameter, 1, 0, 0));
-            CATransform3D Translation = CATransform3DMakeTranslation(-Sin*100*TranslationParameter*SpotlightOutRange, -Cos*100*TranslationParameter*SpotlightOutRange,0);
-            CATransform3D Scale = CATransform3DMakeScale(ScaleParameter, ScaleParameter, 1);
+            CATransform3D Translation = CATransform3DMakeTranslation(Sin*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, Cos*LayerVieTranslation*InTranslationParameter*SpotlightOutRange,0);
+            CATransform3D Scale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);
+            CATransform3D AllTransform = CATransform3DConcat(Translation,Scale);
             
-            CATransform3D TwoTransform = CATransform3DConcat(Rotate,Translation);
-            CATransform3D AllTransform = CATransform3DConcat(TwoTransform,Scale);
-            
-            LayerImageView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), 1000);
+            LayerImageView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
         }
         else //is Parallax layer
         {
             UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
             
-            CATransform3D Rotate = CATransform3DConcat(CATransform3DMakeRotation(-Sin*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(Cos*RotateParameter, 1, 0, 0));
-            CATransform3D Translation = CATransform3DMakeTranslation(Sin*100*TranslationParameter, Cos*100*TranslationParameter, 0);
-            CATransform3D Scale = CATransform3DMakeScale(ScaleParameter, ScaleParameter, 1);
+            CATransform3D Translation = CATransform3DMakeTranslation(-Sin*LayerVieTranslation*InTranslationParameter, -Cos*LayerVieTranslation*InTranslationParameter, 0);
+            CATransform3D Scale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);
+            CATransform3D AllTransform = CATransform3DConcat(Translation,Scale);
             
-            CATransform3D TwoTransform = CATransform3DConcat(Rotate,Translation);
-            CATransform3D AllTransform = CATransform3DConcat(TwoTransform,Scale);
-            
-            LayerImageView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), 1000);
+            LayerImageView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
         }
         
     }
@@ -364,7 +405,7 @@
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowRadius = 8;
     self.layer.shadowOffset = CGSizeMake(0.0f, 12.0f);
-    self.layer.shadowOpacity = 0.3;
+    self.layer.shadowOpacity = 0.6;
     
     //Prevent Spotlight layer have shadow
     SpotLightView.layer.shadowOpacity = 0.0f;
