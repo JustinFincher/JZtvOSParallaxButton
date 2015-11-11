@@ -174,7 +174,7 @@
                           delay: 0
                         options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1 , 1.1);
+                         self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0,1.0);
                          SpotLightView.alpha = 1.0;
                      }
                      completion:^(BOOL finished)

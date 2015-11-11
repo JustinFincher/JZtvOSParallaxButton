@@ -8,7 +8,7 @@
 
 #import "JZViewController.h"
 
-#define SIDEWIDTH 60
+#define SIDEWIDTH 40
 #import "JZParallaxButton.h"
 
 @interface JZViewController ()

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "JZtvOSParallaxButton"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "tvOS Button with Parallax Effect (ObjC)"
 
 # This description is used to generate tags and improve search results.
