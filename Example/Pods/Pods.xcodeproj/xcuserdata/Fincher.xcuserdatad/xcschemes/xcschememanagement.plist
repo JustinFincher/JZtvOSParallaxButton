@@ -4,22 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>JZtvOSParallaxButtom-JZtvOSParallaxButtom.xcscheme</key>
+		<key>JZtvOSParallaxButton-JZtvOSParallaxButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>JZtvOSParallaxButtom.xcscheme</key>
+		<key>JZtvOSParallaxButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-JZtvOSParallaxButtom_Example.xcscheme</key>
+		<key>Pods-JZtvOSParallaxButton_Example.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-JZtvOSParallaxButtom_Tests.xcscheme</key>
+		<key>Pods-JZtvOSParallaxButton_Tests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0A8F7CA814C03646B8FFFCE1C49AA6C3</key>
+		<key>1E88063775E18B2DCE57DEA9E47DDD6F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1CA2E4413145DD7A0C9EAFC843952302</key>
+		<key>2CDBF8C9E11A0DDDA4B3225391B7131A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>57DB215BFF76F1CDDD53A8219DC1A073</key>
+		<key>A396498F856C02F52EC1618816C7DCC6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>93EC4EE2082A357DFBC8855E18B65E82</key>
+		<key>AF21C695BB7950126E50F33654111C6E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint JZtvOSParallaxButtom.podspec' to ensure this is a
+# Be sure to run `pod lib lint JZtvOSParallaxButton.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -16,7 +16,8 @@ Pod::Spec.new do |s|
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-
+  s.description      = <<-DESC
+                       DESC
 
   s.homepage         = "https://github.com/JustinFincher/JZtvOSParallaxButton"
   s.license          = 'MIT'
@@ -29,7 +30,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
-    'JZtvOSParallaxButtom' => ['Pod/Assets/*.png']
+    'JZtvOSParallaxButton' => ['Pod/Assets/*.png']
   }
 
 end

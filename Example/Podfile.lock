@@ -1,14 +1,14 @@
 PODS:
-  - JZtvOSParallaxButtom (0.1.0)
+  - JZtvOSParallaxButton (0.1.0)
 
 DEPENDENCIES:
-  - JZtvOSParallaxButtom (from `../`)
+  - JZtvOSParallaxButton (from `../`)
 
 EXTERNAL SOURCES:
-  JZtvOSParallaxButtom:
+  JZtvOSParallaxButton:
     :path: ../
 
 SPEC CHECKSUMS:
-  JZtvOSParallaxButtom: 2d48475cb03e6a677c9489907bff44e8fe8b9643
+  JZtvOSParallaxButton: bfa5479ec8b9e4f94e8ddea49dfd9bcf84f942bd
 
 COCOAPODS: 0.39.0
