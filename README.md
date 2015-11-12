@@ -10,7 +10,7 @@
 tvOS Button with Parallax Effect (ObjC).  
 Apple TV HIG has a [Video](https://developer.apple.com/tvos/human-interface-guidelines/icons-and-images/images/icons-and-images-layering.mp4)  
 This is a Button try to be similar. With reflection light, long press to enable parallax mode, long press to disable.  
-DemoGif:
+DemoGif:  
 ![https://github.com/JustinFincher/JZtvOSParallaxButton/blob/master/DemoPic/GIF.gif](https://github.com/JustinFincher/JZtvOSParallaxButton/blob/master/DemoPic/GIF.gif)
 
 ## Usage
@@ -38,11 +38,22 @@ You can also tweak these parameters:
 **ScaleAddition**:CGFloat , default 1.0f. When long pressed , the button also scales down parallax image layers to have a perspective effect. and ScaleAddition adjusts this.  
 **isParallax**:BOOL, indicates the button's state.
 
+**ParallaxMethod**:ENUM, 3 choices, this changes depth effect    
+```  
+typedef NS_ENUM(NSInteger, ParallaxMethodType)  
+{  
+    Linear = 0, //Default  
+    EaseIn, //Use this when your want your foreground layer parallax more  
+    EaseOut, //Use this when your want your background layer parallax more  
+};  
+```  
+
 And these:(in JZParallaxButton.m define)  
 **RotateParameter** CGFloat,default 0.4. Rotation angle parameter.  
 **SpotlightOutRange** CGFloat, default 5.0f. indicates the distance from button's center to the reflection light.  
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, clone the repo, and run `pod install` from the Example directory first.  
+JZViewController.m contains 3 Parallax button, 2 posters and 1 icon. Remove the `//` before `addSubview` to see it.
 
 
 ## Installation

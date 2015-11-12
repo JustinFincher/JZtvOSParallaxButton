@@ -16,11 +16,11 @@
 
 //TranslationParameter: Level ++ , TranslationParameter ++
 #define OutTranslationParameter  (float)([LayerArray count] + i)/(float)([LayerArray count] * 2)
-#define InTranslationParameter  (float)(i)/(float)([LayerArray count])
+//#define InTranslationParameter  (float)(i)/(float)([LayerArray count])
 
 //ScaleParameter: Level ++ , ScaleParameter ++
 #define OutScaleParameter  ScaleBase+ScaleAddition/5*((float)i/(float)([LayerArray count]))
-#define InScaleParameter  1+ScaleAddition/10*((float)i/(float)([LayerArray count]))
+//#define InScaleParameter  1+ScaleAddition/10*((float)i/(float)([LayerArray count]))
 
 //RotateParameter:
 #define RotateParameter 0.5
@@ -52,6 +52,8 @@
 @synthesize RotationInterval,RotationNowStep,RotationAllSteps,RotationTimer;
 @synthesize BoundsView;
 @synthesize ScaleAddition,ScaleBase;
+@synthesize ParallaxMethod;
+
 
 - (instancetype)initButtonWithCGRect:(CGRect)RectInfo
                       WithLayerArray:(NSMutableArray *)ArrayOfLayer
@@ -126,6 +128,25 @@
     
     return self;
 }
+
+- (instancetype)initButtonWithCGRect:(CGRect)RectInfo
+                      WithLayerArray:(NSMutableArray *)ArrayOfLayer
+              WithRoundCornerEnabled:(BOOL)isRoundCorner
+           WithCornerRadiusifEnabled:(CGFloat)Radius
+                  WithRotationFrames:(int)Frames
+                WithRotationInterval:(CGFloat)Interval
+                  WithParallaxMethod:(ParallaxMethodType)Parallax
+{
+    self = [self initButtonWithCGRect:RectInfo
+                       WithLayerArray:ArrayOfLayer
+               WithRoundCornerEnabled:isRoundCorner
+            WithCornerRadiusifEnabled:Radius
+                   WithRotationFrames:Frames
+                 WithRotationInterval:Interval];
+    self.ParallaxMethod = Parallax;
+    return self;
+}
+
 
 - (void)selfLongPressed:(UILongPressGestureRecognizer *)sender
 {
@@ -288,6 +309,8 @@
     for (int i = 0 ; i < [LayerArray count]; i++)
     {
         
+        float InTranslationParameter = [self InTranslationParameterWithLayerArray:LayerArray WithIndex:i];
+        float InScaleParameter = [self InScaleParameterWithLayerArray:LayerArray WithIndex:i];
         UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
 
         CATransform3D NewTranslation ;
@@ -369,6 +392,10 @@
     
     for (int i = 0 ; i < [LayerArray count]; i++)
     {
+        float InScaleParameter = [self InScaleParameterWithLayerArray:LayerArray WithIndex:i];
+        float InTranslationParameter = [self InTranslationParameterWithLayerArray:LayerArray WithIndex:i];
+        
+        
         if (i == [LayerArray count] - 1) //is spotlight
         {
             UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
@@ -432,5 +459,53 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
 {
     return CATransform3DConcat(t, CATransform3DMakePerspective(center, disZ));
 }
+
+- (float)InTranslationParameterWithLayerArray:(NSMutableArray *)Array
+                                    WithIndex:(int)i
+{
+
+    switch (ParallaxMethod)
+    {
+        case Linear:
+            return (float)(i)/(float)([Array count]);
+            break;
+            
+        case EaseIn:
+            return powf((float)(i)/(float)([Array count]), 0.5f);
+            break;
+    
+        case EaseOut:
+            return powf((float)(i)/(float)([Array count]), 2.0f);
+            break;
+            
+        default:
+            return (float)(i)/(float)([Array count]);
+            break;
+    }
+}
+- (float)InScaleParameterWithLayerArray:(NSMutableArray *)Array
+                                    WithIndex:(int)i
+{
+    
+    switch (ParallaxMethod)
+    {
+        case Linear:
+            return 1+ScaleAddition/10*((float)i/(float)([LayerArray count]));
+            break;
+            
+        case EaseIn:
+            return 1+ScaleAddition/10*powf(((float)i/(float)([LayerArray count])), 0.5f);
+            break;
+            
+        case EaseOut:
+            return 1+ScaleAddition/10*powf(((float)i/(float)([LayerArray count])), 2.0f);
+            break;
+            
+        default:
+            return 1+ScaleAddition/10*((float)i/(float)([LayerArray count]));
+            break;
+    }
+}
+
 
 @end
