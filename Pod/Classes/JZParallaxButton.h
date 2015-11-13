@@ -17,6 +17,13 @@ typedef NS_ENUM(NSInteger, ParallaxMethodType)
     EaseOut,
 };
 
+typedef NS_ENUM(NSInteger, RotateMethodType)
+{
+    AutoRotate = 0,
+    WithFinger,
+    WithFingerReverse,
+};
+
 @interface JZParallaxButton : UIButton
 
 //当前Button包含的所有ImageLayer
@@ -38,6 +45,7 @@ typedef NS_ENUM(NSInteger, ParallaxMethodType)
 @property (nonatomic) CGFloat ScaleAddition;
 
 @property (nonatomic,assign) ParallaxMethodType ParallaxMethod;
+@property (nonatomic,assign) RotateMethodType RotateMethod;
 
 - (instancetype)initButtonWithCGRect:(CGRect)RectInfo
                       WithLayerArray:(NSMutableArray *)ArrayOfLayer
@@ -52,6 +60,7 @@ typedef NS_ENUM(NSInteger, ParallaxMethodType)
            WithCornerRadiusifEnabled:(CGFloat)Radius
                   WithRotationFrames:(int)Frames
                 WithRotationInterval:(CGFloat)Interval
-                  WithParallaxMethod:(ParallaxMethodType)Parallax;
+                  WithParallaxMethod:(ParallaxMethodType)Parallax
+                    WithRotateMethod:(RotateMethodType)Rotate;
 
 @end

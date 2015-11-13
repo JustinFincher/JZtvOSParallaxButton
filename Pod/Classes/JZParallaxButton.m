@@ -34,13 +34,13 @@
 #import "JZParallaxButton.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface UIButton ()
+@interface UIButton ()<UIGestureRecognizerDelegate>
 
 @property int RotationNowStep;
 @property NSTimer *RotationTimer;
 @property UIImageView *SpotLightView;
 @property UIView *BoundsView;
-
+@property CGPoint TouchPointInSelf;
 @end
 
 @implementation JZParallaxButton
@@ -53,6 +53,7 @@
 @synthesize BoundsView;
 @synthesize ScaleAddition,ScaleBase;
 @synthesize ParallaxMethod;
+@synthesize TouchPointInSelf;
 
 
 - (instancetype)initButtonWithCGRect:(CGRect)RectInfo
@@ -119,15 +120,15 @@
     }
     
     
-
-    
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(selfLongPressed:)];
+    longPress.delegate = self;
     longPress.minimumPressDuration = 0.5;
     [self addGestureRecognizer:longPress];
     
     return self;
 }
+
 
 - (instancetype)initButtonWithCGRect:(CGRect)RectInfo
                       WithLayerArray:(NSMutableArray *)ArrayOfLayer
@@ -136,6 +137,7 @@
                   WithRotationFrames:(int)Frames
                 WithRotationInterval:(CGFloat)Interval
                   WithParallaxMethod:(ParallaxMethodType)Parallax
+                    WithRotateMethod:(RotateMethodType)Rotate
 {
     self = [self initButtonWithCGRect:RectInfo
                        WithLayerArray:ArrayOfLayer
@@ -144,23 +146,86 @@
                    WithRotationFrames:Frames
                  WithRotationInterval:Interval];
     self.ParallaxMethod = Parallax;
+    self.RotateMethod = Rotate;
     return self;
 }
 
 
 - (void)selfLongPressed:(UILongPressGestureRecognizer *)sender
 {
+    CGPoint PressedPoint = [sender locationInView:self];
+    //NSLog(@"%F , %F",PressedPoint.x,PressedPoint.y);
+    self.TouchPointInSelf = PressedPoint;
+    
     if(sender.state == UIGestureRecognizerStateBegan)
     {
-        //NSlog(@"Long Press");
+        //NSLog(@"Long Press");
         
-        if (isParallax)
+        switch (self.RotateMethod)
         {
-            [self EndParallax];
+            case AutoRotate:
+            {
+                if (isParallax)
+                {
+                    [self EndParallax];
+                }
+                else
+                {
+                    [self BeginParallax];
+                }
+            }
+                break;
+                
+            case WithFinger:
+            {
+                if (!isParallax)
+                {
+                    [self BeginParallax];
+                }
+            }
+                break;
+                
+            case WithFingerReverse:
+            {
+                if (!isParallax)
+                {
+                    [self BeginParallax];
+                }
+            }
+                break;
+                
+            default:
+            {
+                if (isParallax)
+                {
+                    [self EndParallax];
+                }
+                else
+                {
+                    [self BeginParallax];
+                }
+            }
+                break;
         }
-        else
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        switch (self.RotateMethod)
         {
-            [self BeginParallax];
+            case WithFinger:
+            {
+                [self EndParallax];
+            }
+                break;
+                
+            case WithFingerReverse:
+            {
+                [self EndParallax];
+            }
+                break;
+                
+            default:
+                break;
         }
     }
 }
@@ -195,21 +260,363 @@
                           delay: 0
                         options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0,1.0);
+                         //self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0,1.0);
                          SpotLightView.alpha = 1.0;
                      }
                      completion:^(BOOL finished)
     {
         if (finished)
         {
-            [self BeginRotation];
+            switch (self.RotateMethod)
+            {
+                case AutoRotate:
+                    [self BeginAutoRotation];
+                    break;
+                    
+                case WithFinger:
+                    [self BeginManualAnimatiom];
+                    break;
+                    
+                case WithFingerReverse:
+                    [self BeginManualAnimatiom];
+                    break;
+                    
+                default:
+                    [self BeginAutoRotation];
+                    break;
+            }
         }
     }
      ];
 }
+
+- (void)BeginManualAnimatiom
+{
+    CGFloat XOffest;
+    if (TouchPointInSelf.x < 0)
+    {
+        XOffest = - self.frame.size.width / 2;
+    }else if (TouchPointInSelf.x > self.frame.size.width)
+    {
+        XOffest = self.frame.size.width / 2;
+    }else
+    {
+        XOffest = TouchPointInSelf.x - self.frame.size.width / 2;
+    }
+    
+    CGFloat YOffest;
+    if (TouchPointInSelf.y < 0)
+    {
+        YOffest = - self.frame.size.height / 2;
+    }else if (TouchPointInSelf.y > self.frame.size.height)
+    {
+        YOffest = self.frame.size.height / 2;
+    }else
+    {
+        YOffest = TouchPointInSelf.y - self.frame.size.height / 2;
+    }
+    
+    //NSLog(@"XOffest : %f , YOffest : %f",XOffest,YOffest);
+    
+    CGFloat XDegress = XOffest / self.frame.size.width / 2;
+    CGFloat YDegress = YOffest / self.frame.size.height / 2;
+    
+    //NSLog(@"XDegress : %f , YDegress : %f",XDegress,YDegress);
+
+    int i =0;
+    CATransform3D NewRotate,NewTranslation,NewScale;
+    
+    switch (self.RotateMethod)
+    {
+        case WithFinger:
+        {
+            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(-XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(YDegress*RotateParameter, 1, 0, 0));
+            NewTranslation = CATransform3DMakeTranslation(XDegress*BoundsVieTranslation*OutTranslationParameter, YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
+        }
+            break;
+            
+        case WithFingerReverse:
+        {
+            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-YDegress*RotateParameter, 1, 0, 0));
+            NewTranslation = CATransform3DMakeTranslation(-XDegress*BoundsVieTranslation*OutTranslationParameter, +YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
+        }
+            break;
+            
+        default:
+        {
+            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-YDegress*RotateParameter, 1, 0, 0));
+            NewTranslation = CATransform3DMakeTranslation(-XDegress*BoundsVieTranslation*OutTranslationParameter, +YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
+        }
+            break;
+    }
+    NewScale = CATransform3DMakeScale(OutScaleParameter, OutScaleParameter, 1);
+    
+    CATransform3D TwoTransform = CATransform3DConcat(NewRotate,NewTranslation);
+    CATransform3D AllTransform = CATransform3DConcat(TwoTransform,NewScale);
+    
+    CABasicAnimation *BoundsLayerCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    BoundsLayerCABasicAnimation.duration = 0.4f;
+    BoundsLayerCABasicAnimation.autoreverses = NO;
+    BoundsLayerCABasicAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax)];
+    BoundsLayerCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:BoundsView.layer.transform];
+    BoundsLayerCABasicAnimation.fillMode = kCAFillModeBoth;
+    BoundsLayerCABasicAnimation.removedOnCompletion = YES;
+    [BoundsView.layer addAnimation:BoundsLayerCABasicAnimation forKey:@"BoundsLayerCABasicAnimation"];
+    BoundsView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
+    
+    for (int i = 0 ; i < [LayerArray count]; i++)
+    {
+        
+        float InTranslationParameter = [self InTranslationParameterWithLayerArray:LayerArray WithIndex:i];
+        float InScaleParameter = [self InScaleParameterWithLayerArray:LayerArray WithIndex:i];
+        UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
+        
+        CATransform3D NewTranslation ;
+        CATransform3D NewScale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);
+        
+        if (i == [LayerArray count] - 1) //is spotlight
+        {
+            switch (self.RotateMethod)
+            {
+                case WithFinger:
+                {
+                    NewTranslation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, 0);
+                }
+                    break;
+                    
+                case WithFingerReverse:
+                {
+                    NewTranslation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, -YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, 0);
+                }
+                    break;
+                    
+                default:
+                {
+                    NewTranslation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, 0);
+                }
+                    break;
+            }
+        }
+        else
+        {
+            switch (self.RotateMethod)
+            {
+                case WithFinger:
+                {
+                    NewTranslation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter, -YDegress*LayerVieTranslation*InTranslationParameter, 0);
+                }
+                    break;
+                    
+                case WithFingerReverse:
+                {
+                    NewTranslation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter, YDegress*LayerVieTranslation*InTranslationParameter, 0);
+                }
+                    break;
+                    
+                default:
+                {
+                    NewTranslation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter, YDegress*LayerVieTranslation*InTranslationParameter, 0);
+                }
+                    break;
+            }
+            
+        }
+        
+        CATransform3D NewAllTransform = CATransform3DConcat(NewTranslation,NewScale);
+        
+        CABasicAnimation *LayerImageViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+        LayerImageViewCABasicAnimation.duration = 0.4f;
+        LayerImageViewCABasicAnimation.autoreverses = YES;
+        LayerImageViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:NewAllTransform];
+        LayerImageViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:LayerImageView.layer.transform];
+        LayerImageViewCABasicAnimation.fillMode = kCAFillModeBoth;
+        LayerImageViewCABasicAnimation.removedOnCompletion = YES;
+        
+        
+        CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+        animGroup.animations = [NSArray arrayWithObjects:LayerImageViewCABasicAnimation,nil];
+        animGroup.duration = 0.4f;
+        animGroup.removedOnCompletion = YES;
+        animGroup.autoreverses = NO;
+        animGroup.fillMode = kCAFillModeRemoved;
+        
+        [CATransaction begin];
+        LayerImageView.layer.transform = CATransform3DPerspect(NewAllTransform, CGPointMake(0, 0), zPositionMax);
+        [CATransaction setCompletionBlock:^
+         {
+             if (i == [LayerArray count] - 1)
+             {
+                 RotationTimer =  [NSTimer scheduledTimerWithTimeInterval:RotationInterval/RotationAllSteps target:self selector:@selector(ManualAnimatiom) userInfo:nil repeats:YES];
+             }
+         }];
+        [LayerImageView.layer addAnimation:animGroup forKey:@"LayerImageViewParallaxInitAnimation"];
+        [CATransaction commit];
+    }
+
+}
+
+- (void)EndManualAnimatiom
+{
+    [RotationTimer invalidate];
+}
+
+-(void)ManualAnimatiom
+{
+    CGFloat XOffest;
+    if (TouchPointInSelf.x < 0)
+    {
+        XOffest = - self.frame.size.width / 2;
+    }else if (TouchPointInSelf.x > self.frame.size.width)
+    {
+        XOffest = self.frame.size.width / 2;
+    }else
+    {
+        XOffest = TouchPointInSelf.x - self.frame.size.width / 2;
+    }
+    
+    CGFloat YOffest;
+    if (TouchPointInSelf.y < 0)
+    {
+        YOffest = - self.frame.size.height / 2;
+    }else if (TouchPointInSelf.y > self.frame.size.height)
+    {
+        YOffest = self.frame.size.height / 2;
+    }else
+    {
+        YOffest = TouchPointInSelf.y - self.frame.size.height / 2;
+    }
+    
+    //NSLog(@"XOffest : %f , YOffest : %f",XOffest,YOffest);
+    
+    CGFloat XDegress = XOffest / self.frame.size.width / 2;
+    CGFloat YDegress = YOffest / self.frame.size.height / 2;
+    
+    //NSLog(@"XDegress : %f , YDegress : %f",XDegress,YDegress);
+
+    
+    int i = 0;
+    CATransform3D NewRotate,NewTranslation,NewScale;
+    switch (self.RotateMethod)
+    {
+        case WithFinger:
+        {
+            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(-XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(YDegress*RotateParameter, 1, 0, 0));
+            NewTranslation = CATransform3DMakeTranslation(XDegress*BoundsVieTranslation*OutTranslationParameter, YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
+        }
+            break;
+            
+        case WithFingerReverse:
+        {
+            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-YDegress*RotateParameter, 1, 0, 0));
+            NewTranslation = CATransform3DMakeTranslation(-XDegress*BoundsVieTranslation*OutTranslationParameter, +YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
+        }
+            break;
+            
+        default:
+        {
+            NewRotate = CATransform3DConcat(CATransform3DMakeRotation(XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-YDegress*RotateParameter, 1, 0, 0));
+            NewTranslation = CATransform3DMakeTranslation(-XDegress*BoundsVieTranslation*OutTranslationParameter, +YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
+        }
+            break;
+    }
+    NewScale = CATransform3DMakeScale(OutScaleParameter, OutScaleParameter, 1);
+    
+    CATransform3D TwoTransform = CATransform3DConcat(NewRotate,NewTranslation);
+    CATransform3D AllTransform = CATransform3DConcat(TwoTransform,NewScale);
+    BoundsView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
+    
+    for (int i = 0 ; i < [LayerArray count]; i++)
+    {
+        float InScaleParameter = [self InScaleParameterWithLayerArray:LayerArray WithIndex:i];
+        float InTranslationParameter = [self InTranslationParameterWithLayerArray:LayerArray WithIndex:i];
+        
+        
+        if (i == [LayerArray count] - 1) //is spotlight
+        {
+            UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
+            
+            CATransform3D Translation;
+            switch (self.RotateMethod)
+            {
+                case WithFinger:
+                {
+                    Translation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange,0);
+                }
+                    break;
+                    
+                case WithFingerReverse:
+                {
+                    Translation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, -YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange,0);
+                }
+                    break;
+                    
+                default:
+                {
+                    Translation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange,0);
+                }
+                    break;
+            }
+
+            CATransform3D Scale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);
+            CATransform3D AllTransform = CATransform3DConcat(Translation,Scale);
+            
+            LayerImageView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
+        }
+        else //is Parallax layer
+        {
+            UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
+            
+            CATransform3D Translation;
+            switch (self.RotateMethod)
+            {
+                case WithFinger:
+                {
+                    Translation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter, -YDegress*LayerVieTranslation*InTranslationParameter,0);
+                }
+                    break;
+                    
+                case WithFingerReverse:
+                {
+                    Translation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter, YDegress*LayerVieTranslation*InTranslationParameter,0);
+                }
+                    break;
+                    
+                default:
+                {
+                    Translation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter, -YDegress*LayerVieTranslation*InTranslationParameter,0);
+                }
+                    break;
+            }
+
+            CATransform3D Scale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);
+            CATransform3D AllTransform = CATransform3DConcat(Translation,Scale);
+            
+            LayerImageView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
+        }
+        
+    }
+
+}
 - (void)EndAnimation
 {
-    [self EndRotation];
+    switch (self.RotateMethod)
+    {
+        case AutoRotate:
+            [self EndAutoRotation];
+            break;
+            
+        case WithFinger:
+            [self EndManualAnimatiom];
+            break;
+            
+        case WithFingerReverse:
+            [self EndManualAnimatiom];
+            break;
+            
+        default:
+            [self EndAutoRotation];
+            break;
+    }
     
     CATransform3D NewRotate = CATransform3DConcat(CATransform3DMakeRotation(0, 0, 1, 0), CATransform3DMakeRotation(0, 1, 0, 0));
     CATransform3D NewTranslation = CATransform3DMakeTranslation(0,0, 0);
@@ -277,7 +684,7 @@
     
 }
 
-- (void)BeginRotation
+- (void)BeginAutoRotation
 {
     //到达起始位置
     
@@ -361,6 +768,7 @@
     
 }
 
+
 - (void)RotationCreator
 {
  
@@ -422,7 +830,7 @@
     
     
 }
-- (void)EndRotation
+- (void)EndAutoRotation
 {
     [RotationTimer invalidate];
 }

@@ -65,6 +65,7 @@
 
     [self.view addSubview:NewPB2];
     NewPB2.ParallaxMethod = EaseIn;
+    NewPB2.RotateMethod = WithFingerReverse;
 
     
 }
