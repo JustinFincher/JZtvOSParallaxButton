@@ -30,6 +30,7 @@
 #define BoundsVieTranslation 50
 #define LayerVieTranslation 20
 
+#define LongPressInterval 0.5
 
 #import "JZParallaxButton.h"
 #import <QuartzCore/QuartzCore.h>
@@ -41,6 +42,7 @@
 @property UIImageView *SpotLightView;
 @property UIView *BoundsView;
 @property CGPoint TouchPointInSelf;
+@property BOOL hasPreformedBeginAnimation;
 @end
 
 @implementation JZParallaxButton
@@ -53,7 +55,7 @@
 @synthesize BoundsView;
 @synthesize ScaleAddition,ScaleBase;
 @synthesize ParallaxMethod;
-@synthesize TouchPointInSelf;
+@synthesize TouchPointInSelf,hasPreformedBeginAnimation;
 
 
 - (instancetype)initButtonWithCGRect:(CGRect)RectInfo
@@ -123,7 +125,7 @@
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(selfLongPressed:)];
     longPress.delegate = self;
-    longPress.minimumPressDuration = 0.5;
+    longPress.minimumPressDuration = LongPressInterval;
     [self addGestureRecognizer:longPress];
     
     return self;
@@ -157,9 +159,10 @@
     //NSLog(@"%F , %F",PressedPoint.x,PressedPoint.y);
     self.TouchPointInSelf = PressedPoint;
     
-    if(sender.state == UIGestureRecognizerStateBegan)
+    if(sender.state == UIGestureRecognizerStateBegan && self.isParallax == NO)
     {
         //NSLog(@"Long Press");
+        self.hasPreformedBeginAnimation = NO;
         
         switch (self.RotateMethod)
         {
@@ -210,26 +213,38 @@
     }
     else if (sender.state == UIGestureRecognizerStateEnded)
     {
-        switch (self.RotateMethod)
+        if (self.hasPreformedBeginAnimation == NO)
         {
-            case WithFinger:
-            {
-                [self EndParallax];
-            }
-                break;
-                
-            case WithFingerReverse:
-            {
-                [self EndParallax];
-            }
-                break;
-                
-            default:
-                break;
+            [self performSelector:@selector(TouchUp) withObject:self afterDelay:LongPressInterval ];
         }
+        else
+        {
+            [self TouchUp];
+        }
+        
     }
 }
 
+- (void)TouchUp
+{
+    switch (self.RotateMethod)
+    {
+        case WithFinger:
+        {
+            [self EndParallax];
+        }
+            break;
+            
+        case WithFingerReverse:
+        {
+            [self EndParallax];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 - (void)BeginParallax
 {
     self.isParallax = YES;
@@ -249,7 +264,6 @@
 
 - (void)EndParallax
 {
-    self.isParallax = NO;
     [self EndAnimation];
     [self RemoveShadow];
 }
@@ -426,7 +440,7 @@
         
         CABasicAnimation *LayerImageViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
         LayerImageViewCABasicAnimation.duration = 0.4f;
-        LayerImageViewCABasicAnimation.autoreverses = YES;
+        LayerImageViewCABasicAnimation.autoreverses = NO;
         LayerImageViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:NewAllTransform];
         LayerImageViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:LayerImageView.layer.transform];
         LayerImageViewCABasicAnimation.fillMode = kCAFillModeBoth;
@@ -447,6 +461,7 @@
              if (i == [LayerArray count] - 1)
              {
                  RotationTimer =  [NSTimer scheduledTimerWithTimeInterval:RotationInterval/RotationAllSteps target:self selector:@selector(ManualAnimatiom) userInfo:nil repeats:YES];
+                 self.hasPreformedBeginAnimation = YES;
              }
          }];
         [LayerImageView.layer addAnimation:animGroup forKey:@"LayerImageViewParallaxInitAnimation"];
@@ -623,7 +638,7 @@
     
     
     CABasicAnimation *BoundsViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-    BoundsViewCABasicAnimation.duration = 0.4f;
+    BoundsViewCABasicAnimation.duration = 0.2f;
     BoundsViewCABasicAnimation.autoreverses = NO;
     BoundsViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DConcat(NewRotate,NewTranslation)];
     BoundsViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:BoundsView.layer.transform];
@@ -631,9 +646,6 @@
     BoundsViewCABasicAnimation.removedOnCompletion = YES;
     [BoundsView.layer addAnimation:BoundsViewCABasicAnimation forKey:@"BoundsViewCABasicAnimation"];
     BoundsView.layer.transform = CATransform3DPerspect(CATransform3DConcat(NewRotate,NewTranslation), CGPointMake(0, 0), zPositionMax);
-    
-
-    
     
     for (int i = 0 ; i < [LayerArray count]; i++)
     {
@@ -645,8 +657,8 @@
         CATransform3D NewAllTransform = CATransform3DConcat(NewTranslation,NewScale);
         
         CABasicAnimation *LayerImageViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-        LayerImageViewCABasicAnimation.duration = 0.4f;
-        LayerImageViewCABasicAnimation.autoreverses = YES;
+        LayerImageViewCABasicAnimation.duration = 0.2f;
+        LayerImageViewCABasicAnimation.autoreverses = NO;
         LayerImageViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:NewAllTransform];
         LayerImageViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:NowTransform];
         LayerImageViewCABasicAnimation.fillMode = kCAFillModeBoth;
@@ -672,7 +684,7 @@
                                   animations:^{
                                       SpotLightView.alpha = 0.0;
                                   }
-                                  completion:^(BOOL finished){}
+                                  completion:^(BOOL finished){ self.isParallax = NO; }
                   ];
 
                  
@@ -736,7 +748,7 @@
         
         CABasicAnimation *LayerImageViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
         LayerImageViewCABasicAnimation.duration = 0.4f;
-        LayerImageViewCABasicAnimation.autoreverses = YES;
+        LayerImageViewCABasicAnimation.autoreverses = NO;
         LayerImageViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:NewAllTransform];
         LayerImageViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:LayerImageView.layer.transform];
         LayerImageViewCABasicAnimation.fillMode = kCAFillModeBoth;
@@ -759,6 +771,7 @@
                  //开始周期循环
                  RotationNowStep = 0;
                  RotationTimer =  [NSTimer scheduledTimerWithTimeInterval:RotationInterval/RotationAllSteps target:self selector:@selector(RotationCreator) userInfo:nil repeats:YES];
+                 self.hasPreformedBeginAnimation = YES;
              }
          }];
         [LayerImageView.layer addAnimation:animGroup forKey:@"LayerImageViewParallaxInitAnimation"];
