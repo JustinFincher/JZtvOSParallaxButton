@@ -159,7 +159,7 @@
     //NSLog(@"%F , %F",PressedPoint.x,PressedPoint.y);
     self.TouchPointInSelf = PressedPoint;
     
-    if(sender.state == UIGestureRecognizerStateBegan && self.isParallax == NO)
+    if(sender.state == UIGestureRecognizerStateBegan)
     {
         //NSLog(@"Long Press");
         self.hasPreformedBeginAnimation = NO;
@@ -638,7 +638,7 @@
     
     
     CABasicAnimation *BoundsViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-    BoundsViewCABasicAnimation.duration = 0.2f;
+    BoundsViewCABasicAnimation.duration = 0.4f;
     BoundsViewCABasicAnimation.autoreverses = NO;
     BoundsViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DConcat(NewRotate,NewTranslation)];
     BoundsViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:BoundsView.layer.transform];
@@ -657,7 +657,7 @@
         CATransform3D NewAllTransform = CATransform3DConcat(NewTranslation,NewScale);
         
         CABasicAnimation *LayerImageViewCABasicAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-        LayerImageViewCABasicAnimation.duration = 0.2f;
+        LayerImageViewCABasicAnimation.duration = 0.4f;
         LayerImageViewCABasicAnimation.autoreverses = NO;
         LayerImageViewCABasicAnimation.toValue = [NSValue valueWithCATransform3D:NewAllTransform];
         LayerImageViewCABasicAnimation.fromValue = [NSValue valueWithCATransform3D:NowTransform];
