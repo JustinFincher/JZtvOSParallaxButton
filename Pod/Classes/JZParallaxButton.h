@@ -27,22 +27,22 @@ typedef NS_ENUM(NSInteger, RotateMethodType)
 @interface JZParallaxButton : UIButton
 
 //当前Button包含的所有ImageLayer
-@property (nonatomic) NSMutableArray *LayerArray;
+@property (nonatomic,strong) NSMutableArray *LayerArray;
 
 //button圆角
-@property (nonatomic) BOOL RoundCornerEnabled;
+@property (nonatomic,assign) BOOL RoundCornerEnabled;
 
 //button圆角
-@property (nonatomic) CGFloat RoundCornerRadius;
+@property (nonatomic,assign) CGFloat RoundCornerRadius;
 
 //是否在Parallax
-@property (nonatomic) BOOL isParallax;
+@property (nonatomic,assign) BOOL isParallax;
 
-@property (nonatomic) int RotationAllSteps;
-@property (nonatomic) CGFloat RotationInterval;
+@property (nonatomic,assign) int RotationAllSteps;
+@property (nonatomic,assign) CGFloat RotationInterval;
 
-@property (nonatomic) CGFloat ScaleBase;
-@property (nonatomic) CGFloat ScaleAddition;
+@property (nonatomic,assign) CGFloat ScaleBase;
+@property (nonatomic,assign) CGFloat ScaleAddition;
 
 @property (nonatomic,assign) ParallaxMethodType ParallaxMethod;
 @property (nonatomic,assign) RotateMethodType RotateMethod;

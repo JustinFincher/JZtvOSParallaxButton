@@ -37,12 +37,12 @@
 
 @interface UIButton ()<UIGestureRecognizerDelegate>
 
-@property int RotationNowStep;
-@property NSTimer *RotationTimer;
-@property UIImageView *SpotLightView;
-@property UIView *BoundsView;
-@property CGPoint TouchPointInSelf;
-@property BOOL hasPreformedBeginAnimation;
+@property (nonatomic,assign) int RotationNowStep;
+@property (nonatomic,weak)NSTimer *RotationTimer;
+@property (nonatomic,strong) UIImageView *SpotLightView;
+@property (nonatomic,strong) UIView *BoundsView;
+@property (nonatomic,assign) CGPoint TouchPointInSelf;
+@property (nonatomic,assign) BOOL hasPreformedBeginAnimation;
 @end
 
 @implementation JZParallaxButton
@@ -270,6 +270,7 @@
 
 - (void)BeginAnimation
 {
+    __weak JZParallaxButton *weakSelf = self;
     [UIView animateWithDuration: 0.1
                           delay: 0
                         options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction)
@@ -284,19 +285,19 @@
             switch (self.RotateMethod)
             {
                 case AutoRotate:
-                    [self BeginAutoRotation];
+                    [weakSelf BeginAutoRotation];
                     break;
                     
                 case WithFinger:
-                    [self BeginManualAnimatiom];
+                    [weakSelf BeginManualAnimatiom];
                     break;
                     
                 case WithFingerReverse:
-                    [self BeginManualAnimatiom];
+                    [weakSelf BeginManualAnimatiom];
                     break;
                     
                 default:
-                    [self BeginAutoRotation];
+                    [weakSelf BeginAutoRotation];
                     break;
             }
         }
@@ -306,6 +307,7 @@
 
 - (void)BeginManualAnimatiom
 {
+    __weak JZParallaxButton *weakSelf = self;
     CGFloat XOffest;
     if (TouchPointInSelf.x < 0)
     {
@@ -460,8 +462,8 @@
          {
              if (i == [LayerArray count] - 1)
              {
-                 RotationTimer =  [NSTimer scheduledTimerWithTimeInterval:RotationInterval/RotationAllSteps target:self selector:@selector(ManualAnimatiom) userInfo:nil repeats:YES];
-                 self.hasPreformedBeginAnimation = YES;
+                 RotationTimer =  [NSTimer scheduledTimerWithTimeInterval:RotationInterval/RotationAllSteps target:weakSelf selector:@selector(ManualAnimatiom) userInfo:nil repeats:YES];
+                 weakSelf.hasPreformedBeginAnimation = YES;
              }
          }];
         [LayerImageView.layer addAnimation:animGroup forKey:@"LayerImageViewParallaxInitAnimation"];
@@ -477,41 +479,42 @@
 
 -(void)ManualAnimatiom
 {
+    __weak JZParallaxButton *weakSelf = self;
     CGFloat XOffest;
     if (TouchPointInSelf.x < 0)
     {
-        XOffest = - self.frame.size.width / 2;
-    }else if (TouchPointInSelf.x > self.frame.size.width)
+        XOffest = - weakSelf.frame.size.width / 2;
+    }else if (TouchPointInSelf.x > weakSelf.frame.size.width)
     {
-        XOffest = self.frame.size.width / 2;
+        XOffest = weakSelf.frame.size.width / 2;
     }else
     {
-        XOffest = TouchPointInSelf.x - self.frame.size.width / 2;
+        XOffest = TouchPointInSelf.x - weakSelf.frame.size.width / 2;
     }
     
     CGFloat YOffest;
     if (TouchPointInSelf.y < 0)
     {
-        YOffest = - self.frame.size.height / 2;
-    }else if (TouchPointInSelf.y > self.frame.size.height)
+        YOffest = - weakSelf.frame.size.height / 2;
+    }else if (TouchPointInSelf.y > weakSelf.frame.size.height)
     {
-        YOffest = self.frame.size.height / 2;
+        YOffest = weakSelf.frame.size.height / 2;
     }else
     {
-        YOffest = TouchPointInSelf.y - self.frame.size.height / 2;
+        YOffest = TouchPointInSelf.y - weakSelf.frame.size.height / 2;
     }
     
     //NSLog(@"XOffest : %f , YOffest : %f",XOffest,YOffest);
     
-    CGFloat XDegress = XOffest / self.frame.size.width / 2;
-    CGFloat YDegress = YOffest / self.frame.size.height / 2;
+    CGFloat XDegress = XOffest / weakSelf.frame.size.width / 2;
+    CGFloat YDegress = YOffest / weakSelf.frame.size.height / 2;
     
     //NSLog(@"XDegress : %f , YDegress : %f",XDegress,YDegress);
 
     
     int i = 0;
     CATransform3D NewRotate,NewTranslation,NewScale;
-    switch (self.RotateMethod)
+    switch (weakSelf.RotateMethod)
     {
         case WithFinger:
         {
@@ -538,20 +541,20 @@
     
     CATransform3D TwoTransform = CATransform3DConcat(NewRotate,NewTranslation);
     CATransform3D AllTransform = CATransform3DConcat(TwoTransform,NewScale);
-    BoundsView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
+    weakSelf.BoundsView.layer.transform = CATransform3DPerspect(AllTransform, CGPointMake(0, 0), zPositionMax);
     
     for (int i = 0 ; i < [LayerArray count]; i++)
     {
-        float InScaleParameter = [self InScaleParameterWithLayerArray:LayerArray WithIndex:i];
-        float InTranslationParameter = [self InTranslationParameterWithLayerArray:LayerArray WithIndex:i];
+        float InScaleParameter = [weakSelf InScaleParameterWithLayerArray:LayerArray WithIndex:i];
+        float InTranslationParameter = [weakSelf InTranslationParameterWithLayerArray:LayerArray WithIndex:i];
         
         
         if (i == [LayerArray count] - 1) //is spotlight
         {
-            UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
+            UIImageView *LayerImageView = [weakSelf.LayerArray objectAtIndex:i];
             
             CATransform3D Translation;
-            switch (self.RotateMethod)
+            switch (weakSelf.RotateMethod)
             {
                 case WithFinger:
                 {
@@ -579,10 +582,10 @@
         }
         else //is Parallax layer
         {
-            UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
+            UIImageView *LayerImageView = [weakSelf.LayerArray objectAtIndex:i];
             
             CATransform3D Translation;
-            switch (self.RotateMethod)
+            switch (weakSelf.RotateMethod)
             {
                 case WithFinger:
                 {
@@ -633,6 +636,8 @@
             break;
     }
     
+    __weak JZParallaxButton *weakSelf = self;
+    
     CATransform3D NewRotate = CATransform3DConcat(CATransform3DMakeRotation(0, 0, 1, 0), CATransform3DMakeRotation(0, 1, 0, 0));
     CATransform3D NewTranslation = CATransform3DMakeTranslation(0,0, 0);
     
@@ -682,9 +687,9 @@
                                        delay: 0
                                      options: (UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction)
                                   animations:^{
-                                      SpotLightView.alpha = 0.0;
+                                      weakSelf.SpotLightView.alpha = 0.0;
                                   }
-                                  completion:^(BOOL finished){ self.isParallax = NO; }
+                                  completion:^(BOOL finished){ weakSelf.isParallax = NO; }
                   ];
 
                  
@@ -698,6 +703,7 @@
 
 - (void)BeginAutoRotation
 {
+    __weak JZParallaxButton *weakSelf = self;
     //到达起始位置
     
     CGFloat PIE = 0;
@@ -770,8 +776,8 @@
              {
                  //开始周期循环
                  RotationNowStep = 0;
-                 RotationTimer =  [NSTimer scheduledTimerWithTimeInterval:RotationInterval/RotationAllSteps target:self selector:@selector(RotationCreator) userInfo:nil repeats:YES];
-                 self.hasPreformedBeginAnimation = YES;
+                 RotationTimer =  [NSTimer scheduledTimerWithTimeInterval:RotationInterval/RotationAllSteps target:weakSelf selector:@selector(RotationCreator) userInfo:nil repeats:YES];
+                 weakSelf.hasPreformedBeginAnimation = YES;
              }
          }];
         [LayerImageView.layer addAnimation:animGroup forKey:@"LayerImageViewParallaxInitAnimation"];
@@ -784,6 +790,7 @@
 
 - (void)RotationCreator
 {
+    __weak JZParallaxButton *weakSelf = self;
  
     //NSlog(@"RotationNowStep : %d of %d",RotationNowStep,RotationAllSteps);
     if (RotationNowStep == RotationAllSteps)
@@ -819,7 +826,7 @@
         
         if (i == [LayerArray count] - 1) //is spotlight
         {
-            UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
+            UIImageView *LayerImageView = [weakSelf.LayerArray objectAtIndex:i];
             
             CATransform3D Translation = CATransform3DMakeTranslation(Sin*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, Cos*LayerVieTranslation*InTranslationParameter*SpotlightOutRange,0);
             CATransform3D Scale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);
@@ -829,7 +836,7 @@
         }
         else //is Parallax layer
         {
-            UIImageView *LayerImageView = [LayerArray objectAtIndex:i];
+            UIImageView *LayerImageView = [weakSelf.LayerArray objectAtIndex:i];
             
             CATransform3D Translation = CATransform3DMakeTranslation(-Sin*LayerVieTranslation*InTranslationParameter, -Cos*LayerVieTranslation*InTranslationParameter, 0);
             CATransform3D Scale = CATransform3DMakeScale(InScaleParameter, InScaleParameter, 1);

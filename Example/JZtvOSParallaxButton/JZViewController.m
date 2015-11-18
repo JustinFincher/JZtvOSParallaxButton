@@ -51,8 +51,8 @@
     
     
     //[self.view addSubview:NewPB1];
-    //NewPB1.ParallaxMethod = EaseIn;
-    //NewPB1.RotateMethod = WithFingerReverse;
+    NewPB1.ParallaxMethod = EaseIn;
+    NewPB1.RotateMethod = AutoRotate;
     
     NSMutableArray *Layers2 = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"INCEPTION1"],[UIImage imageNamed:@"INCEPTION2"],[UIImage imageNamed:@"INCEPTION3"],[UIImage imageNamed:@"INCEPTION4"],[UIImage imageNamed:@"INCEPTION5"],[UIImage imageNamed:@"INCEPTION6"], nil];
     
