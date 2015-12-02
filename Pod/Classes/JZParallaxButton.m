@@ -79,7 +79,7 @@
     
     BoundsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     BoundsView.layer.masksToBounds = YES;
-    BoundsView.layer.shouldRasterize = TRUE;
+    BoundsView.layer.shouldRasterize = YES;
     BoundsView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     if (self.RoundCornerEnabled)
     {
@@ -93,7 +93,7 @@
         UIImageView *LayerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         UIImage *LayerImage = [ArrayOfLayer objectAtIndex:i];
         [LayerImageView setImage:LayerImage];
-        LayerImageView.layer.shouldRasterize = TRUE;
+        LayerImageView.layer.shouldRasterize = YES;
         LayerImageView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         
         //从下往上添加
@@ -166,7 +166,7 @@
         
         switch (self.RotateMethod)
         {
-            case AutoRotate:
+            case RotateMethodTypeAutoRotate:
             {
                 if (isParallax)
                 {
@@ -179,7 +179,7 @@
             }
                 break;
                 
-            case WithFinger:
+            case RotateMethodTypeWithFinger:
             {
                 if (!isParallax)
                 {
@@ -188,7 +188,7 @@
             }
                 break;
                 
-            case WithFingerReverse:
+            case RotateMethodTypeWithFingerReverse:
             {
                 if (!isParallax)
                 {
@@ -229,13 +229,13 @@
 {
     switch (self.RotateMethod)
     {
-        case WithFinger:
+        case RotateMethodTypeWithFinger:
         {
             [self EndParallax];
         }
             break;
             
-        case WithFingerReverse:
+        case RotateMethodTypeWithFingerReverse:
         {
             [self EndParallax];
         }
@@ -284,15 +284,15 @@
         {
             switch (self.RotateMethod)
             {
-                case AutoRotate:
+                case RotateMethodTypeAutoRotate:
                     [weakSelf BeginAutoRotation];
                     break;
                     
-                case WithFinger:
+                case RotateMethodTypeWithFinger:
                     [weakSelf BeginManualAnimatiom];
                     break;
                     
-                case WithFingerReverse:
+                case RotateMethodTypeWithFingerReverse:
                     [weakSelf BeginManualAnimatiom];
                     break;
                     
@@ -344,14 +344,14 @@
     
     switch (self.RotateMethod)
     {
-        case WithFinger:
+        case RotateMethodTypeWithFinger:
         {
             NewRotate = CATransform3DConcat(CATransform3DMakeRotation(-XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(YDegress*RotateParameter, 1, 0, 0));
             NewTranslation = CATransform3DMakeTranslation(XDegress*BoundsVieTranslation*OutTranslationParameter, YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
         }
             break;
             
-        case WithFingerReverse:
+        case RotateMethodTypeWithFingerReverse:
         {
             NewRotate = CATransform3DConcat(CATransform3DMakeRotation(XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-YDegress*RotateParameter, 1, 0, 0));
             NewTranslation = CATransform3DMakeTranslation(-XDegress*BoundsVieTranslation*OutTranslationParameter, +YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
@@ -394,13 +394,13 @@
         {
             switch (self.RotateMethod)
             {
-                case WithFinger:
+                case RotateMethodTypeWithFinger:
                 {
                     NewTranslation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, 0);
                 }
                     break;
                     
-                case WithFingerReverse:
+                case RotateMethodTypeWithFingerReverse:
                 {
                     NewTranslation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, -YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, 0);
                 }
@@ -417,13 +417,13 @@
         {
             switch (self.RotateMethod)
             {
-                case WithFinger:
+                case RotateMethodTypeWithFinger:
                 {
                     NewTranslation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter, -YDegress*LayerVieTranslation*InTranslationParameter, 0);
                 }
                     break;
                     
-                case WithFingerReverse:
+                case RotateMethodTypeWithFingerReverse:
                 {
                     NewTranslation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter, YDegress*LayerVieTranslation*InTranslationParameter, 0);
                 }
@@ -516,14 +516,14 @@
     CATransform3D NewRotate,NewTranslation,NewScale;
     switch (weakSelf.RotateMethod)
     {
-        case WithFinger:
+        case RotateMethodTypeWithFinger:
         {
             NewRotate = CATransform3DConcat(CATransform3DMakeRotation(-XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(YDegress*RotateParameter, 1, 0, 0));
             NewTranslation = CATransform3DMakeTranslation(XDegress*BoundsVieTranslation*OutTranslationParameter, YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
         }
             break;
             
-        case WithFingerReverse:
+        case RotateMethodTypeWithFingerReverse:
         {
             NewRotate = CATransform3DConcat(CATransform3DMakeRotation(XDegress*RotateParameter, 0, 1, 0), CATransform3DMakeRotation(-YDegress*RotateParameter, 1, 0, 0));
             NewTranslation = CATransform3DMakeTranslation(-XDegress*BoundsVieTranslation*OutTranslationParameter, +YDegress*BoundsVieTranslation*OutTranslationParameter, 0);
@@ -556,13 +556,13 @@
             CATransform3D Translation;
             switch (weakSelf.RotateMethod)
             {
-                case WithFinger:
+                case RotateMethodTypeWithFinger:
                 {
                     Translation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange,0);
                 }
                     break;
                     
-                case WithFingerReverse:
+                case RotateMethodTypeWithFingerReverse:
                 {
                     Translation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange, -YDegress*LayerVieTranslation*InTranslationParameter*SpotlightOutRange,0);
                 }
@@ -587,13 +587,13 @@
             CATransform3D Translation;
             switch (weakSelf.RotateMethod)
             {
-                case WithFinger:
+                case RotateMethodTypeWithFinger:
                 {
                     Translation = CATransform3DMakeTranslation(-XDegress*LayerVieTranslation*InTranslationParameter, -YDegress*LayerVieTranslation*InTranslationParameter,0);
                 }
                     break;
                     
-                case WithFingerReverse:
+                case RotateMethodTypeWithFingerReverse:
                 {
                     Translation = CATransform3DMakeTranslation(XDegress*LayerVieTranslation*InTranslationParameter, YDegress*LayerVieTranslation*InTranslationParameter,0);
                 }
@@ -619,15 +619,15 @@
 {
     switch (self.RotateMethod)
     {
-        case AutoRotate:
+        case RotateMethodTypeAutoRotate:
             [self EndAutoRotation];
             break;
             
-        case WithFinger:
+        case RotateMethodTypeWithFinger:
             [self EndManualAnimatiom];
             break;
             
-        case WithFingerReverse:
+        case RotateMethodTypeWithFingerReverse:
             [self EndManualAnimatiom];
             break;
             
@@ -894,15 +894,15 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
 
     switch (ParallaxMethod)
     {
-        case Linear:
+        case ParallaxMethodTypeLinear:
             return (float)(i)/(float)([Array count]);
             break;
             
-        case EaseIn:
+        case ParallaxMethodTypeEaseIn:
             return powf((float)(i)/(float)([Array count]), 0.5f);
             break;
     
-        case EaseOut:
+        case ParallaxMethodTypeEaseOut:
             return powf((float)(i)/(float)([Array count]), 2.0f);
             break;
             
@@ -917,15 +917,15 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     
     switch (ParallaxMethod)
     {
-        case Linear:
+        case ParallaxMethodTypeLinear:
             return 1+ScaleAddition/10*((float)i/(float)([LayerArray count]));
             break;
             
-        case EaseIn:
+        case ParallaxMethodTypeEaseIn:
             return 1+ScaleAddition/10*powf(((float)i/(float)([LayerArray count])), 0.5f);
             break;
             
-        case EaseOut:
+        case ParallaxMethodTypeEaseOut:
             return 1+ScaleAddition/10*powf(((float)i/(float)([LayerArray count])), 2.0f);
             break;
             

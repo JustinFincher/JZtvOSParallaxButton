@@ -38,7 +38,7 @@ NSMutableArray *Layers = [[NSMutableArray alloc] initWithObjects:[UIImage imageN
 **WithCornerRadiusifEnabled**:CGFloat  
 **WithRotationFrames**:int,how many frames should be rendered if the button rotates itself for a complete turn.  
 **WithRotationInterval**:CGFloat,how many seconds should the button rotates itself for a complete turn.  
-(Tips: `WithRotationFrames/WithRotationInterval` indicates how a rotation & position lasts, usually it should be < 1/24 , or with any RotateMethodType the rotation animation will be lag)  
+(Tips: `WithRotationInterval/WithRotationFrames` indicates how a rotation & position lasts, usually it should be < 1/24 , or with any RotateMethodType the rotation animation will be lag)  
 
 You can also tweak these parameters:  
 **ScaleBase**:CGFloat , default 1.0f. When long pressed , the button scales up for a little bit, and this is how much should be scaled up.  
@@ -49,18 +49,18 @@ You can also tweak these parameters:
 ```  
 typedef NS_ENUM(NSInteger, ParallaxMethodType)  
 {  
-    Linear = 0, //Default  
-    EaseIn, //Use this when your want your foreground layer parallax more  
-    EaseOut, //Use this when your want your background layer parallax more  
+    ParallaxMethodTypeLinear = 0, //Default  
+    ParallaxMethodTypeEaseIn, //Use this when your want your foreground layer parallax more  
+    ParallaxMethodTypeEaseOut, //Use this when your want your background layer parallax more  
 };  
 ```  
 **RotateMethodType**:ENUM, 3 choices, this changes if rotation effect is automatic, or changes with finger movements.      
 ```
 typedef NS_ENUM(NSInteger, RotateMethodType)
 {
-    AutoRotate = 0, //Default
-    WithFinger, //Rotation for the direction where finger at.
-    WithFingerReverse, //Rotation for the opposite direction where finger at.
+    RotateMethodTypeAutoRotate = 0, //Default
+    RotateMethodTypeWithFinger, //Rotation for the direction where finger at.
+    RotateMethodTypeWithFingerReverse, //Rotation for the opposite direction where finger at.
 };
 ```
 
@@ -113,7 +113,7 @@ JZtvOSParallaxButton 是一个模仿Apple TV中三维视差按钮的UIButton.
 **WithCornerRadiusifEnabled**:CGFloat 圆角的半径  
 **WithRotationFrames**:int,就是自转一周要用多少帧（这里说的不太严谨 其实指的不是帧速 而是按钮自己一周要做多少次3DTransform的Animation）   
 **WithRotationInterval**:CGFloat,一周要多少秒    
-(建议: `WithRotationFrames/WithRotationInterval` 表示一帧保持多少秒, 一般这个数字应该小于 1/24 , 否则对于任何RotateMethodType整个动画都会显得很卡)  
+(建议: `WithRotationInterval/WithRotationFrames` 表示一帧保持多少秒, 一般这个数字应该小于 1/24 , 否则对于任何RotateMethodType整个动画都会显得很卡)  
 
 还有这些参数：  
 **ScaleBase**:CGFloat , 默认1.0f. 长按的时候 有个变大的动画 这个可以改变大多少 不过默认1.0够了    
@@ -124,18 +124,18 @@ JZtvOSParallaxButton 是一个模仿Apple TV中三维视差按钮的UIButton.
 ```  
 typedef NS_ENUM(NSInteger, ParallaxMethodType)  
 {  
-    Linear = 0, //默认  
-    EaseIn, //如果想要前排的图层视差效果更好些    
-    EaseOut, //如果想要后排的图层视差效果更好些    
+    ParallaxMethodTypeLinear = 0, //默认  
+    ParallaxMethodTypeEaseIn, //如果想要前排的图层视差效果更好些    
+    ParallaxMethodTypeEaseOut, //如果想要后排的图层视差效果更好些    
 };  
 ```  
 **RotateMethodType**:枚举, 3 选择, 改变自转效果是自动的 还是跟随手指      
 ```
 typedef NS_ENUM(NSInteger, RotateMethodType)
 {  
-    AutoRotate = 0, //默认    
-    WithFinger, //按钮向手指按下的地方转动  
-    WithFingerReverse, //按钮向手指按下的反方向转动  
+    RotateMethodTypeAutoRotate = 0, //默认    
+    RotateMethodTypeWithFinger, //按钮向手指按下的地方转动  
+    RotateMethodTypeWithFingerReverse, //按钮向手指按下的反方向转动  
 };  
 ```   
 还有这些:(在JZParallaxButton.m的define)  

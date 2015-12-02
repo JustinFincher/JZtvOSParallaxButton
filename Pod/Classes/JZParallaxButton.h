@@ -12,16 +12,16 @@
 
 typedef NS_ENUM(NSInteger, ParallaxMethodType)
 {
-    Linear = 0,
-    EaseIn,
-    EaseOut,
+    ParallaxMethodTypeLinear = 0,
+    ParallaxMethodTypeEaseIn,
+    ParallaxMethodTypeEaseOut,
 };
 
 typedef NS_ENUM(NSInteger, RotateMethodType)
 {
-    AutoRotate = 0,
-    WithFinger,
-    WithFingerReverse,
+    RotateMethodTypeAutoRotate = 0,
+    RotateMethodTypeWithFinger,
+    RotateMethodTypeWithFingerReverse,
 };
 
 @interface JZParallaxButton : UIButton
